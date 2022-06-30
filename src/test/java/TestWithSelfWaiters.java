@@ -8,33 +8,22 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import otus.java.qa.professional.homework.components.MainCoursesComponents;
 import otus.java.qa.professional.homework.driver.ChromeDriverManager;
+import otus.java.qa.professional.homework.pages.MainPage;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class TestWithSelfWaiters {
-
-    public WebDriver driver;
-
-    public final static String SITE = "https://otus.ru";
-
-    @BeforeMethod(description = "Start browser")
-    public void oneTimeSetUp(){
-        ChromeDriverManager chromeDriverManager = new ChromeDriverManager();
-        chromeDriverManager.initializeWebDriver();
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
+public class TestWithSelfWaiters extends BaseTest{
 
     @Test
     public void mainTest(){
-        driver.get(SITE);
-    }
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openSite();
 
-    @AfterMethod
-    public void TearDown(){
-        driver.close();
+        MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
+        mainCoursesComponents.filterBy();
     }
 
 }
