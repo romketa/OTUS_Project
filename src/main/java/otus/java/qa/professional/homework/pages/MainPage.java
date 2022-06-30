@@ -16,6 +16,4 @@ public class MainPage {
         driver.get(SITE);
     }
 
-
-
 }

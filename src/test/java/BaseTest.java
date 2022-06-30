@@ -11,14 +11,14 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void oneTimeSetUp(){
         driver = WebDriverManager.chromedriver().create();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
-    @AfterClass
+    @AfterMethod
     public void TearDown(){
         driver.quit();
     }

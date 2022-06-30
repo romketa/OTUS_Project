@@ -17,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TestWithSelfWaiters extends BaseTest{
 
-    @Test
+    @Test(description = "Check filtering")
     public void mainTest(){
         MainPage mainPage = new MainPage(driver);
         mainPage.openSite();
 
         MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
-        mainCoursesComponents.filterBy();
+        mainCoursesComponents.filterByName("QA");
     }
 
 }
