@@ -2,7 +2,7 @@ package otus.java.qa.professional.homework.driver;
 
 import org.openqa.selenium.WebDriver;
 
-public interface IDriver {
+public interface IDriverFactory {
 
-    WebDriver initializeWebDriver();
+    WebDriver getDriver();
 }

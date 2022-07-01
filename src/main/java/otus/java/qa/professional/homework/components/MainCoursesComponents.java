@@ -120,40 +120,14 @@ public class MainCoursesComponents extends BaseComponents {
         for (WebElement hrefWebElement : blockOfCourses) {
             String courseDate = hrefWebElement.findElement(By.xpath(dateOfCourse)).getText();
             String courseName = hrefWebElement.findElement(By.xpath(nameOfCourse)).getText();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("C dd ");
+            //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("C dd ");
             mapElementsAndHref.put(courseDate + " " + courseName, hrefWebElement);
         }
-       /* for (WebElement hrefWebElement : blockSpecializations) {
+        /*for (WebElement hrefWebElement : blockSpecializations) {
             String courseName = hrefWebElement.findElement(By.cssSelector(dateOfSpecializations)).getText();
             mapElementsAndHref.put(courseName, hrefWebElement);
         }*/
         mapElementsAndHref.forEach((s, webElement) -> System.out.println(s));
         return this;
     }
-
-/*
-        Stream<String> listOfFamousCourseName = getListOfTextFromBlock(allCourses, nameOfCourse).stream();
-        Stream<String> listOfSpecializationsCourseName = getListOfTextFromBlock(blockSpecializations, nameOfCourse).stream();
-        Stream<String> listOfRecommendationCourseName = getListOfTextFromBlock(blockRecommendationCourses, nameOfCourse).stream();
-*/
-
-/*
-        switch (mainCourses) {
-            case FAMOUS_COURSES -> {
-                listOfFamousCourseName
-                        .filter(s -> s.equals(name))
-                        .collect(Collectors.toList());
-
-            }
-            case SPECIALIZATIONS -> {
-                Stream<String> listOfSpecializationsCourseName = getListOfTextFromBlock(blockSpecializations, nameOfCourse).stream();
-
-            }
-            case RECOMMENDATIONS -> {
-                Stream<String> listOfRecommendationCourseName = getListOfTextFromBlock(blockRecommendationCourses, nameOfCourse).stream();
-
-            }
-        }*/
-
-
 }

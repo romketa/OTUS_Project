@@ -4,6 +4,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import otus.java.qa.professional.homework.driver.DriverFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,9 +14,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void oneTimeSetUp(){
-        driver = WebDriverManager.chromedriver().create();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        DriverFactory driverFactory = new DriverFactory();
+        driver = driverFactory.getDriver();
     }
 
     @AfterMethod

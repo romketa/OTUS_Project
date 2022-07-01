@@ -1,15 +1,15 @@
-package otus.java.qa.professional.homework.driver;
+package otus.java.qa.professional.homework.driver.impl;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import otus.java.qa.professional.homework.driver.DriverFactory;
 
-public class ChromeDriverManager implements IDriver {
+public class ChromeDriverManager extends DriverFactory {
 
     private static WebDriver driver;
 
-    @Override
     public WebDriver initializeWebDriver() {
         if(driver == null){
             setDriver();
@@ -20,6 +20,7 @@ public class ChromeDriverManager implements IDriver {
 
 
     public static void setDriver(){
+
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");

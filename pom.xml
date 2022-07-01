@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>otus.java.qa.professional.homework</groupId>
-    <artifactId>InitialProject</artifactId>
+    <artifactId>OTUS_Project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
@@ -15,15 +15,15 @@
         <testng.version>6.14.3</testng.version>
         <faker.version>1.0.1</faker.version>
 
-        <chromeBrowser>chrome</chromeBrowser>
-        <firefoxBrowser>firefox</firefoxBrowser>
-        <operaBrowser>opera</operaBrowser>
+        <browser.name>chrome</browser.name>
+        <browser.name>firefox</browser.name>
+        <browser.name>opera</browser.name>
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
         <test.project.language>RU</test.project.language>
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
 
-        <surefire.plugin.version>2.22.2</surefire.plugin.version>
+        <surefire.plugin.version>2.19.1</surefire.plugin.version>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -69,9 +69,15 @@
 
     <profiles>
         <profile>
-            <id>production</id>
+            <id>chrome</id>
             <properties>
-                <webdriver.base.url>https://otus.ru</webdriver.base.url>
+                <browser.name>chrome</browser.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>opera</id>
+            <properties>
+                <browser.name>chrome</browser.name>
             </properties>
         </profile>
         <profile>
@@ -81,5 +87,27 @@
             </properties>
         </profile>
     </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.plugin.version}</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <browser>${browser.name}</browser>
+                            <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
+                            </webdriver.timeouts.implicitlywait>
+                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                            <test.project.status>test</test.project.status>
+                            <test.project.language>${test.project.language}</test.project.language>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
