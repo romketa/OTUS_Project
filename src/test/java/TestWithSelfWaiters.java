@@ -23,7 +23,9 @@ public class TestWithSelfWaiters extends BaseTest{
         mainPage.openSite();
 
         MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
-        mainCoursesComponents.filterByName("QA");
+        mainCoursesComponents.getEarlyCourse();
+        //mainCoursesComponents.filterByName("QA");
+
     }
 
 }
