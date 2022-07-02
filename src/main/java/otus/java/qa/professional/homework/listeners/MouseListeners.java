@@ -78,12 +78,12 @@ public class MouseListeners implements WebDriverEventListener {
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red;'", element);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'border:6px solid red')", element);
     }
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red;'", element);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].style.removeProperty('border')", element);
     }
 
     @Override

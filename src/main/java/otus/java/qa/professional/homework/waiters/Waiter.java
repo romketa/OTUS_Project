@@ -1,18 +1,16 @@
 package otus.java.qa.professional.homework.waiters;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.function.Function;
 
 public class Waiter {
 
     private static int waitForElementTimeoutSeconds = 10;
+    private static int pollingEveryInMillis = 2;
 
     protected WebDriver driver;
 
@@ -20,19 +18,26 @@ public class Waiter {
         this.driver = driver;
     }
 
+    public WebElement waitForCourseName(String courseName) {
+        Wait customWaiter = new FluentWait<>(driver)
+                .withTimeout(Duration.of(waitForElementTimeoutSeconds, ChronoUnit.SECONDS))
+                .pollingEvery(Duration.of(pollingEveryInMillis, ChronoUnit.MILLIS))
+                .ignoring(NoSuchElementException.class);
+
+        return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> driver.findElement(By.xpath("//div[contains(text(), '" + courseName + "')]")));
+    }
+
     public WebElement waitForElementVisible(WebElement element) {
         return new WebDriverWait(driver, waitForElementTimeoutSeconds).until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void WaitForCourseName(String courseName) {
-        Wait customWaiter = new FluentWait(driver)
-                .withTimeout(Duration.of(waitForElementTimeoutSeconds, ChronoUnit.SECONDS))
-                .withMessage(courseName);
-        customWaiter.until(ExpectedConditions.titleIs(courseName));
+    public Boolean waitForElementInvisible(WebElement element) {
+        return new WebDriverWait(driver, waitForElementTimeoutSeconds).until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public void WaitForElementIsVisible() {
 
+    public WebElement waitForElementVisibleLocated(By locator) {
+        return new WebDriverWait(driver, waitForElementTimeoutSeconds).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
 }

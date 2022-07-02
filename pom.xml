@@ -15,9 +15,9 @@
         <testng.version>6.14.3</testng.version>
         <faker.version>1.0.1</faker.version>
 
-        <browser.name>chrome</browser.name>
-        <browser.name>firefox</browser.name>
-        <browser.name>opera</browser.name>
+        <browser>chrome</browser>
+        <browser>firefox</browser>
+        <browser>opera</browser>
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
         <test.project.language>RU</test.project.language>
 
@@ -71,13 +71,13 @@
         <profile>
             <id>chrome</id>
             <properties>
-                <browser.name>chrome</browser.name>
+                <browser>chrome</browser>
             </properties>
         </profile>
         <profile>
             <id>opera</id>
             <properties>
-                <browser.name>chrome</browser.name>
+                <browser>opera</browser>
             </properties>
         </profile>
         <profile>
@@ -97,7 +97,7 @@
                     <version>${surefire.plugin.version}</version>
                     <configuration>
                         <systemPropertyVariables>
-                            <browser>${browser.name}</browser>
+                            <browser>${browser}</browser>
                             <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
                             </webdriver.timeouts.implicitlywait>
                             <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
