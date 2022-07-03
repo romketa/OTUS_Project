@@ -4,7 +4,14 @@ package otus.java.qa.professional.homework.listeners;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.util.concurrent.TimeUnit;
+
+
 public class MouseListeners implements WebDriverEventListener {
+
+
+    public MouseListeners() {
+    }
 
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
@@ -79,11 +86,21 @@ public class MouseListeners implements WebDriverEventListener {
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
         ((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('style', 'border:6px solid red')", element);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
         ((JavascriptExecutor)driver).executeScript("arguments[0].style.removeProperty('border')", element);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

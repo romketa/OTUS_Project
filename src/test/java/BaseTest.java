@@ -1,12 +1,10 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 import otus.java.qa.professional.homework.driver.DriverFactory;
 import otus.java.qa.professional.homework.listeners.MouseListeners;
+import otus.java.qa.professional.homework.pages.MainPage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +16,9 @@ public class BaseTest {
     public void oneTimeSetUp(){
         driver = new DriverFactory().getDriver();
         driver.register(new MouseListeners());
+        new MainPage(driver).openSite();
     }
+
 
     @AfterClass
     public void TearDown(){

@@ -18,13 +18,14 @@ public class Waiter {
         this.driver = driver;
     }
 
-    public WebElement waitForCourseName(String courseName) {
+    public WebElement waitForCourseName(WebElement webElement) {
         Wait customWaiter = new FluentWait<>(driver)
                 .withTimeout(Duration.of(waitForElementTimeoutSeconds, ChronoUnit.SECONDS))
                 .pollingEvery(Duration.of(pollingEveryInMillis, ChronoUnit.MILLIS))
                 .ignoring(NoSuchElementException.class);
 
-        return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> driver.findElement(By.xpath("//div[contains(text(), '" + courseName + "')]")));
+        //return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> driver.findElement(By.xpath("//div[contains(text(), '" + courseName + "')]")));
+        return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> webElement);
     }
 
     public WebElement waitForElementVisible(WebElement element) {

@@ -1,5 +1,5 @@
 otus\java\qa\professional\homework\driver\impl\IWebDriver.class
-otus\java\qa\professional\homework\driver\impl\ChromeDriverManager.class
+otus\java\qa\professional\homework\data\Course.class
 otus\java\qa\professional\homework\components\BaseComponents.class
 otus\java\qa\professional\homework\driver\IDriverFactory.class
 otus\java\qa\professional\homework\listeners\MouseListeners.class
@@ -12,4 +12,5 @@ otus\java\qa\professional\homework\pages\BasePage.class
 otus\java\qa\professional\homework\exceptions\DriverTypeNotSupported.class
 otus\java\qa\professional\homework\driver\impl\OperaWebDriver.class
 otus\java\qa\professional\homework\driver\impl\ChromeWebDriver.class
+otus\java\qa\professional\homework\pages\CoursePage.class
 otus\java\qa\professional\homework\pages\MainPage.class

@@ -6,13 +6,13 @@ import org.openqa.selenium.support.PageFactory;
 import otus.java.qa.professional.homework.listeners.MouseListeners;
 import otus.java.qa.professional.homework.waiters.Waiter;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class BaseComponents {
 
     protected WebDriver driver;
     protected Actions actions;
     protected Waiter waiter;
-
-
     protected MouseListeners mouseListeners;
 
     public BaseComponents(WebDriver driver) {

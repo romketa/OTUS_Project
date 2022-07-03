@@ -1,65 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-07-02T09:36:58Z" name="Surefire suite" finished-at="2022-07-02T09:37:01Z" duration-ms="3691">
+  <suite started-at="2022-07-03T20:43:12Z" name="Surefire suite" finished-at="2022-07-03T20:43:34Z" duration-ms="22177">
     <groups>
     </groups>
-    <test started-at="2022-07-02T09:36:58Z" name="Surefire test" finished-at="2022-07-02T09:37:01Z" duration-ms="3691">
-      <class name="TestWithSelfWaiters">
-        <test-method is-config="true" signature="oneTimeSetUp()[pri:0, instance:TestWithSelfWaiters@5ed828d]" started-at="2022-07-02T09:36:58Z" name="oneTimeSetUp" finished-at="2022-07-02T09:36:59Z" duration-ms="1211" status="PASS">
+    <test started-at="2022-07-03T20:43:12Z" name="Surefire test" finished-at="2022-07-03T20:43:34Z" duration-ms="22177">
+      <class name="OTUS_Test">
+        <test-method is-config="true" signature="oneTimeSetUp()[pri:0, instance:OTUS_Test@13c27452]" started-at="2022-07-03T20:43:12Z" name="oneTimeSetUp" finished-at="2022-07-03T20:43:27Z" duration-ms="15292" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- oneTimeSetUp -->
-        <test-method signature="mainTest()[pri:0, instance:TestWithSelfWaiters@5ed828d]" started-at="2022-07-02T09:36:59Z" name="mainTest" description="Check filtering" finished-at="2022-07-02T09:37:01Z" duration-ms="2379" status="FAIL">
-          <exception class="java.lang.NullPointerException">
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-at java.base/java.util.Objects.requireNonNull(Objects.java:208)
-at org.openqa.selenium.support.ui.FluentWait.<init>(FluentWait.java:106)
-at org.openqa.selenium.support.ui.WebDriverWait.<init>(WebDriverWait.java:85)
-at org.openqa.selenium.support.ui.WebDriverWait.<init>(WebDriverWait.java:45)
-at otus.java.qa.professional.homework.waiters.Waiter.waitForElementVisible(Waiter.java:40)
-at otus.java.qa.professional.homework.components.MainCoursesComponents.moveToEarlyComponent(MainCoursesComponents.java:143)
-at TestWithSelfWaiters.mainTest(TestWithSelfWaiters.java:16)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:577)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-at org.testng.TestRunner.privateRun(TestRunner.java:648)
-at org.testng.TestRunner.run(TestRunner.java:505)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
-at org.testng.SuiteRunner.run(SuiteRunner.java:364)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
-at org.testng.TestNG.runSuites(TestNG.java:1049)
-at org.testng.TestNG.run(TestNG.java:1017)
-at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:132)
-at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
-at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
-at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:147)
-at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:290)
-at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:242)
-at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+        <test-method signature="checkFilteringCourseByName()[pri:1, instance:OTUS_Test@13c27452]" started-at="2022-07-03T20:43:27Z" name="checkFilteringCourseByName" description="Check filtering by Name" finished-at="2022-07-03T20:43:28Z" duration-ms="1240" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- mainTest -->
-        <test-method is-config="true" signature="TearDown()[pri:0, instance:TestWithSelfWaiters@5ed828d]" started-at="2022-07-02T09:37:01Z" name="TearDown" finished-at="2022-07-02T09:37:01Z" duration-ms="90" status="PASS">
+        </test-method> <!-- checkFilteringCourseByName -->
+        <test-method signature="checkSelectingEarlierCourse()[pri:2, instance:OTUS_Test@13c27452]" started-at="2022-07-03T20:43:28Z" name="checkSelectingEarlierCourse" description="Check selecting earlier Course" finished-at="2022-07-03T20:43:31Z" duration-ms="2814" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkSelectingEarlierCourse -->
+        <test-method signature="checkSelectingLaterCourse()[pri:3, instance:OTUS_Test@13c27452]" started-at="2022-07-03T20:43:31Z" name="checkSelectingLaterCourse" description="Check selecting later Course" finished-at="2022-07-03T20:43:34Z" duration-ms="2744" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkSelectingLaterCourse -->
+        <test-method is-config="true" signature="TearDown()[pri:0, instance:OTUS_Test@13c27452]" started-at="2022-07-03T20:43:34Z" name="TearDown" finished-at="2022-07-03T20:43:34Z" duration-ms="78" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TearDown -->
-      </class> <!-- TestWithSelfWaiters -->
+      </class> <!-- OTUS_Test -->
     </test> <!-- Surefire test -->
   </suite> <!-- Surefire suite -->
 </testng-results>

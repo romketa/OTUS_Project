@@ -4,18 +4,20 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Date;
 
-public class Courses {
+public class Course {
     private String name;
     private Date date;
     private WebElement element;
-
     private String linkToCourse;
 
-    public Courses(String name, Date date, WebElement element, String linkToCourse) {
+    public WebElement elementForBorderHighlight;
+
+    public Course(String name, Date date, WebElement element, String linkToCourse, WebElement elementForBorderHighlight) {
         this.name = name;
         this.date = date;
         this.element = element;
         this.linkToCourse = linkToCourse;
+        this.elementForBorderHighlight = elementForBorderHighlight;
     }
 
     public String getName() {
@@ -32,5 +34,9 @@ public class Courses {
 
     public String getLinkToCourse() {
         return linkToCourse;
+    }
+
+    public WebElement getElementForBorderHighlight() {
+        return elementForBorderHighlight;
     }
 }

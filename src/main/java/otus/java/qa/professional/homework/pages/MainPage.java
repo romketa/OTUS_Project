@@ -2,10 +2,9 @@ package otus.java.qa.professional.homework.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class MainPage {
+public class MainPage extends BasePage{
 
     private WebDriver driver;
-
     private static final String SITE = "https://otus.ru";
 
     public MainPage(WebDriver driver) {

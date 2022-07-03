@@ -10,7 +10,7 @@ public class OperaWebDriver implements IWebDriver{
     @Override
     public WebDriver setUpDriver() {
         WebDriver driver = WebDriverManager.operadriver().create();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
     }

@@ -1,15 +1,16 @@
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\IDriverFactory.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\impl\FirefoxWebDriver.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\components\MainCoursesComponents.java
-D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\impl\ChromeDriverManager.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\pages\BasePage.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\DriverFactory.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\exceptions\DriverTypeNotSupported.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\impl\IWebDriver.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\impl\OperaWebDriver.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\listeners\MouseListeners.java
+D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\data\Course.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\data\MainCourses.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\waiters\Waiter.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\driver\impl\ChromeWebDriver.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\pages\MainPage.java
 D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\components\BaseComponents.java
+D:\Repo\OTUS_Project\src\main\java\otus\java\qa\professional\homework\pages\CoursePage.java
