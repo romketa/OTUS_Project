@@ -1,14 +1,15 @@
 package otus.java.qa.professional.homework.components;
 
 
-import com.mifmif.common.regex.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import otus.java.qa.professional.homework.data.Course;
-import otus.java.qa.professional.homework.pages.CoursePage;
+import otus.java.qa.professional.homework.data.LessonType;
+import otus.java.qa.professional.homework.pages.LessonPage;
+import otus.java.qa.professional.homework.waiters.Waiter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,20 +42,6 @@ public class MainCoursesComponents extends BaseComponents {
         super(driver);
     }
 
-    /*public MainCoursesComponents filterByName(String name) throws ParseException {
-
-        for (WebElement courseWebElement : blockOfCoursesAndSpecializations) {
-            String courseName = courseWebElement.findElement(By.xpath(nameOfCourse)).getText();
-            String urlCourse = courseWebElement.getAttribute("href");
-            String courseDate = courseWebElement.findElement(By.xpath(dateOfCourse)).getText();
-            if (courseName.contains(name)) {
-                coursesList.add(new Course(courseName, toDate(courseDate), courseWebElement, urlCourse));
-            }
-        }
-        System.out.println("Courses have been filtered by input name:");
-        return this;
-    }*/
-
     public MainCoursesComponents collectCourses() throws ParseException {
         for (WebElement hrefWebElement : blockOfCourses) {
             WebElement visibleElementOnPage = waiter.waitForElementVisible(hrefWebElement);
@@ -65,7 +52,7 @@ public class MainCoursesComponents extends BaseComponents {
 
             if (courseDate.startsWith("С")) {
                 String result = courseDate.substring(2);
-                coursesList.add(new Course(courseName, toDate(result), hrefWebElement, urlCourse, elementForBorderHighlight));
+                coursesList.add(new Course(courseName, toDate(result), hrefWebElement, urlCourse, elementForBorderHighlight, LessonType.COURSES));
             }
         }
         for (WebElement hrefWebElement : blockSpecializations) {
@@ -78,7 +65,7 @@ public class MainCoursesComponents extends BaseComponents {
             if (courseDate.matches(".*\\d.*")) {
                 String[] s = courseDate.split(" ");
                 String result = s[0] + " " + s[1];
-                coursesList.add(new Course(courseName, toDate(result), hrefWebElement, urlCourse, elementForBorderHighlight));
+                coursesList.add(new Course(courseName, toDate(result), hrefWebElement, urlCourse, elementForBorderHighlight, LessonType.SPECIALIZATIONS));
             }
         }
         return this;
@@ -122,11 +109,6 @@ public class MainCoursesComponents extends BaseComponents {
         return this;
     }
 
-    /*public MainCoursesComponents sortByDate(Boolean byDate){
-        selectedCourse = getEarlyOrLaterCourse(byDate);
-        return this;
-    }*/
-
     public MainCoursesComponents moveToSelectedCourse() {
         WebElement element = waiter.waitForElementVisible(selectedCourse.getElement());
         actions.moveToElement(element).build().perform();
@@ -135,26 +117,22 @@ public class MainCoursesComponents extends BaseComponents {
         return this;
     }
 
-    public CoursePage checkCoursePage() {
-        actions.moveToElement(selectedCourse.getElement()).click().build().perform();
-        return new CoursePage(driver);
+    public LessonCourseComponents getCoursePage() {
+        actions.click(selectedCourse.getElement()).build().perform();
+        return new LessonCourseComponents(driver);
     }
 
-    public MainCoursesComponents getCoursesFromMainPage() {
-        for (WebElement hrefWebElement : blockOfCoursesAndSpecializations) {
-            String courseName = hrefWebElement.findElement(By.xpath(nameOfCourse)).getText();
-            //mapCourseNamesAndCourseLink.put(courseName, hrefWebElement);
+    public void checkCourseName(){
+        LessonCourseComponents lessonCourseComponents = new LessonCourseComponents(driver);
+        if (selectedCourse.getTypeOfLesson() == LessonType.COURSES){
+            Assert.assertEquals(selectedCourse.getName(), lessonCourseComponents.getCourseName());
+        } else if (selectedCourse.getTypeOfLesson() == LessonType.SPECIALIZATIONS){
+            Assert.assertEquals(selectedCourse.getName(), lessonCourseComponents.getSpecializationName());
         }
-        System.out.println("Courses haven't been filtered by input name:");
-        //mapCourseNamesAndCourseLink.forEach((s, webElement) -> System.out.println(s));
-        return this;
     }
 
     public MainCoursesComponents checkThatCourseExistOnPage() {
         Assert.assertEquals(selectedCourse.getElement(), waiter.waitForCourseName(selectedCourse.getElement()));
-        /*coursesList.stream()
-                .map(courses -> courses.getName())
-                .forEach(courseName -> Assert.assertNotNull(waiter.waitForCourseName(courseName)));*/
         return this;
     }
 }

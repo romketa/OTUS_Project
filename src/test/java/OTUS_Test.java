@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.*;
 import otus.java.qa.professional.homework.components.MainCoursesComponents;
 
@@ -17,20 +18,22 @@ public class OTUS_Test extends BaseTest{
     @Test(description = "Check selecting earlier Course", priority = 2)
     public void checkSelectingEarlierCourse() throws ParseException {
 
-        Boolean filterByDate = false;
-        new MainCoursesComponents(driver)
+        MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
+        mainCoursesComponents
                 .collectCourses()
-                .getEarlyOrLaterCourse(filterByDate)
+                .getEarlyOrLaterCourse(false)
                 .checkThatCourseExistOnPage()
-                .moveToSelectedCourse();
+                .moveToSelectedCourse()
+                .getCoursePage();
+        mainCoursesComponents.checkCourseName();
     }
+
     @Test(description = "Check selecting later Course", priority = 3)
     public void checkSelectingLaterCourse() throws ParseException {
 
-        Boolean filterByDate = true;
         new MainCoursesComponents(driver)
                 .collectCourses()
-                .getEarlyOrLaterCourse(filterByDate)
+                .getEarlyOrLaterCourse(true)
                 .checkThatCourseExistOnPage()
                 .moveToSelectedCourse();
     }

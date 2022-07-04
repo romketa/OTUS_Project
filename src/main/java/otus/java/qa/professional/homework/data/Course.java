@@ -9,15 +9,17 @@ public class Course {
     private Date date;
     private WebElement element;
     private String linkToCourse;
+    private LessonType typeOfLesson;
 
     public WebElement elementForBorderHighlight;
 
-    public Course(String name, Date date, WebElement element, String linkToCourse, WebElement elementForBorderHighlight) {
+    public Course(String name, Date date, WebElement element, String linkToCourse, WebElement elementForBorderHighlight, LessonType typeOfLesson) {
         this.name = name;
         this.date = date;
         this.element = element;
         this.linkToCourse = linkToCourse;
         this.elementForBorderHighlight = elementForBorderHighlight;
+        this.typeOfLesson = typeOfLesson;
     }
 
     public String getName() {
@@ -39,4 +41,6 @@ public class Course {
     public WebElement getElementForBorderHighlight() {
         return elementForBorderHighlight;
     }
+
+    public LessonType getTypeOfLesson() { return typeOfLesson;}
 }

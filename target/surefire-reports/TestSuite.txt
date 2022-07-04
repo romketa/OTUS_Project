@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.334 sec - in TestSuite
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 12.673 sec <<< FAILURE! - in TestSuite
+checkFilteringCourseByName(OTUS_Test)  Time elapsed: 0.166 sec  <<< FAILURE!
+java.text.ParseException: Unparseable date: "28 θώνÿ"
+	at OTUS_Test.checkFilteringCourseByName(OTUS_Test.java:14)
+
+checkSelectingEarlierCourse(OTUS_Test)  Time elapsed: 0.07 sec  <<< FAILURE!
+java.text.ParseException: Unparseable date: "28 θώνÿ"
+	at OTUS_Test.checkSelectingEarlierCourse(OTUS_Test.java:23)
+
+checkSelectingLaterCourse(OTUS_Test)  Time elapsed: 0.07 sec  <<< FAILURE!
+java.text.ParseException: Unparseable date: "28 θώνÿ"
+	at OTUS_Test.checkSelectingLaterCourse(OTUS_Test.java:35)
+

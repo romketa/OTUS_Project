@@ -24,7 +24,6 @@ public class Waiter {
                 .pollingEvery(Duration.of(pollingEveryInMillis, ChronoUnit.MILLIS))
                 .ignoring(NoSuchElementException.class);
 
-        //return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> driver.findElement(By.xpath("//div[contains(text(), '" + courseName + "')]")));
         return (WebElement) customWaiter.until((Function<WebDriver, WebElement>) driver -> webElement);
     }
 
