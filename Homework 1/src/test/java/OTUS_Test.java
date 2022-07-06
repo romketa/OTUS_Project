@@ -1,44 +1,37 @@
-import org.testng.Assert;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
-import otus.java.qa.professional.homework.components.MainCoursesComponents;
-import otus.java.qa.professional.homework.pages.MainPage;
-
-import java.text.ParseException;
+import otus.ru.java.qa.professional.homework.components.LessonCourseComponents;
+import otus.ru.java.qa.professional.homework.components.MainCoursesComponents;
 
 public class OTUS_Test extends BaseTest{
 
     @Test(description = "Check filtering by Name", priority = 1)
-    public void checkFilteringCourseByName() throws ParseException {
+    public void checkFilteringCourseByName() {
 
         String filterByCourseName = System.getProperty("filterByCourseName");
         new MainCoursesComponents(driver)
-                .collectCourses()
                 .filterByCourseName(filterByCourseName);
     }
 
     @Test(description = "Check selecting earlier Course", priority = 2)
-    public void checkSelectingEarlierCourse() throws ParseException {
+    public void checkSelectingEarlierCourse() {
 
         MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
+        WebElement selectedCourse = mainCoursesComponents.getEarlyOrLaterCourse(true);
         mainCoursesComponents
-                .collectCourses()
-                .getEarlyOrLaterCourse(false)
-                .checkThatCourseExistOnPage()
-                .moveToSelectedCourse()
-                .getCoursePage();
-        mainCoursesComponents.checkCourseName();
+                .checkThatCourseExistOnPage(selectedCourse)
+                .moveToElementAndHighlight(selectedCourse);
     }
 
     @Test(description = "Check selecting later Course", priority = 3)
-    @Ignore
-    public void checkSelectingLaterCourse() throws ParseException {
+    public void checkSelectingLaterCourse() {
+
 
         MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
-        new MainCoursesComponents(driver)
-                .collectCourses()
-                .getEarlyOrLaterCourse(true)
-                .checkThatCourseExistOnPage()
-                .moveToSelectedCourse();
+        WebElement selectedCourse = mainCoursesComponents.getEarlyOrLaterCourse(false);
+        mainCoursesComponents
+                .checkThatCourseExistOnPage(selectedCourse)
+                .moveToElementAndHighlight(selectedCourse);
     }
 
 }

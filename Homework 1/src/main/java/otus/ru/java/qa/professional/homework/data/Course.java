@@ -1,14 +1,19 @@
-package otus.java.qa.professional.homework.data;
+package otus.ru.java.qa.professional.homework.data;
 
 import org.openqa.selenium.WebElement;
 
 import java.util.Date;
 
 public class Course {
+
     private String name;
+
     private Date date;
+
     private WebElement element;
+
     private String linkToCourse;
+
     private LessonType typeOfLesson;
 
     public WebElement elementForBorderHighlight;

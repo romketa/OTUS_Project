@@ -14,11 +14,14 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <testng.version>6.14.3</testng.version>
         <faker.version>1.0.1</faker.version>
+        <dotenv>5.2.2</dotenv>
 
         <browser>chrome</browser>
         <browser>firefox</browser>
         <browser>opera</browser>
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
+        <wait.for.element.timeout.seconds>10</wait.for.element.timeout.seconds>
+        <polling.every.in.millis>200</polling.every.in.millis>
         <test.project.language>RU</test.project.language>
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
@@ -32,9 +35,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <maven.compile.encoding>UTF-8</maven.compile.encoding>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>${dotenv}</version>
+        </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -103,6 +112,8 @@
                             <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                             <test.project.status>test</test.project.status>
                             <test.project.language>${test.project.language}</test.project.language>
+                            <source>1.8</source>
+                            <target>1.8</target>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>

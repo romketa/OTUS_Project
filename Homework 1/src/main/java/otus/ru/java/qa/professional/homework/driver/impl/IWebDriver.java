@@ -1,4 +1,4 @@
-package otus.java.qa.professional.homework.driver.impl;
+package otus.ru.java.qa.professional.homework.driver.impl;
 
 import org.openqa.selenium.WebDriver;
 
