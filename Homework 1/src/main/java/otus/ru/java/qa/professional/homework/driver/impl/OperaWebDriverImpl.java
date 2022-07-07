@@ -9,7 +9,6 @@ public class OperaWebDriverImpl implements IWebDriver{
     public WebDriver setUpDriver() {
         WebDriver driver = WebDriverManager.operadriver().create();
         DriverManager.manageDriver(driver);
-        DriverManager.openSite(driver);
         return driver;
     }
 }

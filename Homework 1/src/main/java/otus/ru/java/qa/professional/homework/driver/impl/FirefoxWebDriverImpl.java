@@ -10,7 +10,6 @@ public class FirefoxWebDriverImpl implements IWebDriver{
     public WebDriver setUpDriver() {
         WebDriver driver = WebDriverManager.firefoxdriver().create();
         DriverManager.manageDriver(driver);
-        DriverManager.openSite(driver);
         return driver;
     }
 }

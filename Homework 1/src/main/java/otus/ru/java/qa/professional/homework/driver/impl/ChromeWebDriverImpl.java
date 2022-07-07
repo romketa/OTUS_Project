@@ -9,7 +9,6 @@ public class ChromeWebDriverImpl implements IWebDriver{
     public WebDriver setUpDriver() {
         WebDriver driver = WebDriverManager.chromedriver().create();
         DriverManager.manageDriver(driver);
-        DriverManager.openSite(driver);
         return driver;
     }
 }

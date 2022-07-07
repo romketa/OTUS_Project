@@ -9,8 +9,4 @@ public class DriverManager {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
-
-    public static void openSite(WebDriver driver){
-        driver.get(System.getProperty("webdriver.base.url"));
-    }
 }

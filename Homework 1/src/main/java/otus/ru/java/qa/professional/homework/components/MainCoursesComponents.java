@@ -1,6 +1,7 @@
 package otus.ru.java.qa.professional.homework.components;
 
 
+import com.mifmif.common.regex.Main;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -56,7 +57,7 @@ public class MainCoursesComponents extends BaseComponents {
         if (currentWebElement.get().findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
             date = currentWebElement.map(element -> getElementTextByCss(element, LESSON_DATE_SPECIALIZATION)).get();
         } else date = currentWebElement.map(element -> getElementTextByCss(element, LESSON_DATE_COURSE)).get();
-        System.out.println("|-------|-------|" + selectedCourse + " has been selected! Date of start is " + date);
+        System.out.println("|-------|-------| " + selectedCourse + " has been selected! Date of start is " + date);
 
         return currentWebElement.get();
     }
@@ -134,11 +135,11 @@ public class MainCoursesComponents extends BaseComponents {
 
     public void checkCourseName(String courseName, LessonCourseComponents lessonCourseComponents) {
         if (courseName.startsWith(LessonType.SPECIALIZATIONS.getName())) {
-            Assert.assertEquals(courseName, lessonCourseComponents.getSpecializationName(), "|-------|-------|Tittle on a page Specialization isn't correct");
+            Assert.assertEquals(courseName, lessonCourseComponents.getSpecializationName(), "|-------|-------| Tittle on a page Specialization isn't correct");
         } else {
-            Assert.assertEquals(courseName, lessonCourseComponents.getCourseName(), "|-------|-------|Tittle on a page Course isn't correct");
+            Assert.assertEquals(courseName, lessonCourseComponents.getCourseName(), "|-------|-------| Tittle on a page Course isn't correct");
         }
-        System.out.println("|-------|-------|Course name is correctly displayed");
+        System.out.println("|-------|-------| Course name is correctly displayed");
     }
 
     public MainCoursesComponents checkThatCourseExistOnPage(WebElement element) {
