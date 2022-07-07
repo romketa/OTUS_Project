@@ -11,6 +11,6 @@ public class BaseActions {
     }
 
     public static void clickByElementAction(WebElement element, WebDriver driver){
-        new Actions(driver).click(element).build().perform();
+        new Actions(driver).moveToElement(element).click().build().perform();
     }
 }

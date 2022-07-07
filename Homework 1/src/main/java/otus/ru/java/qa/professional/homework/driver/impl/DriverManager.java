@@ -1,9 +1,6 @@
 package otus.ru.java.qa.professional.homework.driver.impl;
 
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
@@ -14,6 +11,6 @@ public class DriverManager {
     }
 
     public static void openSite(WebDriver driver){
-        driver.get("https://otus.ru");
+        driver.get(System.getProperty("webdriver.base.url"));
     }
 }

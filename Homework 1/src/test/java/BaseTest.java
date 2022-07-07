@@ -7,14 +7,14 @@ public class BaseTest {
 
     protected EventFiringWebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void oneTimeSetUp(){
         driver = new DriverFactoryImpl().getDriver();
         driver.register(new SpecialEventListener());
     }
 
 
-    @AfterClass
+    @AfterMethod
     public void TearDown(){
         driver.quit();
     }

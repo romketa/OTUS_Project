@@ -35,7 +35,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <maven.compile.encoding>UTF-8</maven.compile.encoding>
-        <java.version>1.8</java.version>
+        <java.version>18</java.version>
     </properties>
 
     <dependencies>
@@ -90,9 +90,9 @@
             </properties>
         </profile>
         <profile>
-            <id>test</id>
+            <id>firefox</id>
             <properties>
-                <webdriver.base.url>https://test.otus.ru</webdriver.base.url>
+                <browser>firefox</browser>
             </properties>
         </profile>
     </profiles>
@@ -109,16 +109,24 @@
                             <browser>${browser}</browser>
                             <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
                             </webdriver.timeouts.implicitlywait>
-                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                             <test.project.status>test</test.project.status>
                             <test.project.language>${test.project.language}</test.project.language>
-                            <source>1.8</source>
-                            <target>1.8</target>
                         </systemPropertyVariables>
+                        <systemProperties>
+                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}</wait.for.element.timeout.seconds>
+                            <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
+                        </systemProperties>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

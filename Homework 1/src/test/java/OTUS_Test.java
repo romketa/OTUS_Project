@@ -16,22 +16,27 @@ public class OTUS_Test extends BaseTest{
     @Test(description = "Check selecting earlier Course", priority = 2)
     public void checkSelectingEarlierCourse() {
 
-        MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
-        WebElement selectedCourse = mainCoursesComponents.getEarlyOrLaterCourse(true);
-        mainCoursesComponents
+        MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
+        WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(true);
+        String courseName = coursesComponents.getCourseName(selectedCourse);
+        coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)
-                .moveToElementAndHighlight(selectedCourse);
+                .moveToElementAndHighlight(selectedCourse)
+                .clickByElement(selectedCourse);
+        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(driver));
     }
 
     @Test(description = "Check selecting later Course", priority = 3)
     public void checkSelectingLaterCourse() {
 
-
-        MainCoursesComponents mainCoursesComponents = new MainCoursesComponents(driver);
-        WebElement selectedCourse = mainCoursesComponents.getEarlyOrLaterCourse(false);
-        mainCoursesComponents
+        MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
+        WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(false);
+        String courseName = coursesComponents.getCourseName(selectedCourse);
+        coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)
-                .moveToElementAndHighlight(selectedCourse);
+                .moveToElementAndHighlight(selectedCourse)
+                .clickByElement(selectedCourse);
+        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(driver));;
     }
 
 }

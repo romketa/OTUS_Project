@@ -6,9 +6,6 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 public class SpecialEventListener implements WebDriverEventListener {
 
 
-    public SpecialEventListener() {
-    }
-
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
 
@@ -87,6 +84,10 @@ public class SpecialEventListener implements WebDriverEventListener {
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
         ((JavascriptExecutor)driver).executeScript("arguments[0].style.removeProperty('border')", element);
+    }
+
+    public void scrollIntoView(WebElement element, WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     @Override
