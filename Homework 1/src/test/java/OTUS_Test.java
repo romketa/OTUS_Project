@@ -2,6 +2,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import otus.ru.java.qa.professional.homework.components.LessonCourseComponents;
 import otus.ru.java.qa.professional.homework.components.MainCoursesComponents;
+import otus.ru.java.qa.professional.homework.po.BasePage;
 
 public class OTUS_Test extends BaseTest{
 
@@ -29,6 +30,7 @@ public class OTUS_Test extends BaseTest{
     @Test(description = "Check selecting later Course", priority = 3)
     public void checkSelectingLaterCourse() {
 
+        BasePage.openSite(driver);
         MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
         WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(false);
         String courseName = coursesComponents.getCourseName(selectedCourse);

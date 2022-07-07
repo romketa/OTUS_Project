@@ -12,10 +12,6 @@ public class BaseTest {
     public void oneTimeSetUp(){
         driver = new DriverFactoryImpl().getDriver();
         driver.register(new SpecialEventListener());
-    }
-
-    @BeforeMethod
-    public void openSiteForTest(){
         BasePage.openSite(driver);
     }
 
