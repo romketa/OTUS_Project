@@ -3,13 +3,13 @@
 Для запуска тестов нужно:
     1. Склонировать к себе репозиторий
     2. Открыть консоль в папке с проектом
-    3. В консоль ввести команду - mvn clean test -P{browser} -DfilterByCourseName={courseName}:
+    3. В консоль ввести команду - mvn clean test -Dbrowser={browser} -DfilterByCourseName={courseName}:
             *где вместо {browser} нужно ввести браузер, в котором хотите запустить(chrome, opera, firefox);
             *где вместо {courseName} нужно ввести название курса, по которому хотите отфильтровать список курсов на главной странице, например QA
 	4. Пример вызовов:
-			*mvn clean test -Pchrome -DfilterByCourseName=QA
-			*mvn clean test -Popera -DfilterByCourseName=QA
-			*mvn clean test -Pfirefox -DfilterByCourseName=QA
+			*mvn clean test -Dbrowser=chrome -DfilterByCourseName=QA
+			*mvn clean test -Dbrowser=opera -DfilterByCourseName=QA
+			*mvn clean test -Dbrowser=firefox -DfilterByCourseName=QA
 
 Тест выведет на экран результат:
     1. Работу метода фильтрации - вернет список отфильтрованных курсов

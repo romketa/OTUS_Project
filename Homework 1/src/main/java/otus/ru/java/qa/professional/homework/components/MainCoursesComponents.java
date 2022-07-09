@@ -45,7 +45,8 @@ public class MainCoursesComponents extends BaseComponents {
         System.out.println(byDate ? "|-------|-------| Looking for earlier course" : "|-------|-------| Looking for later course");
 
         var currentWebElement = elCoursesList.stream()
-                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().startsWith("О дате старта"))
+                //.filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().startsWith("О дате старта"))
+                .filter(element -> element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("\\d.*\\s.*"))
                 .reduce((el1, el2) -> {
                     Date dateFirstElementDate = new Date();
                     Date dateSecondElementDate = new Date();

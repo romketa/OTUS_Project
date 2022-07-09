@@ -78,21 +78,9 @@
 
     <profiles>
         <profile>
-            <id>chrome</id>
+            <id>test</id>
             <properties>
-                <browser>chrome</browser>
-            </properties>
-        </profile>
-        <profile>
-            <id>opera</id>
-            <properties>
-                <browser>opera</browser>
-            </properties>
-        </profile>
-        <profile>
-            <id>firefox</id>
-            <properties>
-                <browser>firefox</browser>
+                <url>https://otus.ru</url>
             </properties>
         </profile>
     </profiles>
@@ -114,7 +102,8 @@
                         </systemPropertyVariables>
                         <systemProperties>
                             <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}</wait.for.element.timeout.seconds>
+                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
+                            </wait.for.element.timeout.seconds>
                             <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
                         </systemProperties>
                     </configuration>
