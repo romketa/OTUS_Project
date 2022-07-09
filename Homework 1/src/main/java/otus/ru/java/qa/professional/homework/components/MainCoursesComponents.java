@@ -45,13 +45,19 @@ public class MainCoursesComponents extends BaseComponents {
         System.out.println(byDate ? "|-------|-------| Looking for earlier course" : "|-------|-------| Looking for later course");
 
         var currentWebElement = elCoursesList.stream()
-                //.filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().startsWith("О дате старта"))
-                .filter(element -> element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("\\d.*\\s.*"))
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
                 .reduce((el1, el2) -> {
-                    Date dateFirstElementDate = new Date();
-                    Date dateSecondElementDate = new Date();
-                    WebElement element = getSortedWebElementByDate(el1, el2, dateFirstElementDate, dateSecondElementDate, byDate);
-                    return element;
+                    Date dateFirstElementDate = getDate(el1);
+                    Date dateSecondElementDate = getDate(el2);
+                    if (byDate) {
+                        if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
+                        else return el2;
+                    } else if (!byDate) {
+                        if (dateFirstElementDate.compareTo(dateSecondElementDate) > 0) return el1;
+                        else return el2;
+                    } else {
+                        return el1;
+                    }
                 });
         String selectedCourse = currentWebElement.map(element -> getElementTextByCss(element, COURSE_NAME)).get();
         String date;
@@ -72,43 +78,25 @@ public class MainCoursesComponents extends BaseComponents {
         return element.findElement(By.cssSelector(lessonDate)).getText();
     }
 
-    @NotNull
-    private WebElement getSortedWebElementByDate(WebElement el1, WebElement el2, Date dateFirstElementDate, Date dateSecondElementDate, Boolean byDate) {
-        if (el1.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
-            String[] date = getElementTextByCss(el1, LESSON_DATE_SPECIALIZATION).split(" ");
+    private Date getDate(WebElement element) {
+        Date currentDate = new Date();
+        if (element.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
+            String[] date = getElementTextByCss(element, LESSON_DATE_SPECIALIZATION).split(" ");
             try {
-                dateFirstElementDate = toDate(date[0] + " " + date[1]);
+                currentDate = toDate(date[0] + " " + date[1]);
             } catch (ParseException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Date " + date[0] + " " + date[1] + "is incorrect parsed");
+                System.out.println("Date " + date[0] + " " + date[1] + " is incorrect parsed");
             }
         } else {
             try {
-                dateFirstElementDate = toDate(getElementTextByCss(el1, LESSON_DATE_COURSE).substring(2));
+                currentDate = toDate(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
             } catch (ParseException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Date " + getElementTextByCss(el1, LESSON_DATE_COURSE) + "is incorrect parsed");
+                System.out.println("Date " + getElementTextByCss(element, LESSON_DATE_COURSE) + " is incorrect parsed");
             }
         }
-
-        if (el2.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
-            String[] date = getElementTextByCss(el2, LESSON_DATE_SPECIALIZATION).split(" ");
-            try {
-                dateSecondElementDate = toDate(date[0] + " " + date[1]);
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Date " + date[0] + " " + date[1] + "is incorrect parsed");
-            }
-        } else {
-            try {
-                dateSecondElementDate = toDate(getElementTextByCss(el2, LESSON_DATE_COURSE).substring(2));
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Date " + getElementTextByCss(el2, LESSON_DATE_COURSE) + "is incorrect parsed");
-            }
-        }
-        if (byDate) return dateFirstElementDate.getTime() <= dateSecondElementDate.getTime() ? el1 : el2;
-        else return dateFirstElementDate.getTime() >= dateSecondElementDate.getTime() ? el1 : el2;
+        return currentDate;
     }
 
     public MainCoursesComponents moveToElementAndHighlight(WebElement element) {
@@ -122,8 +110,7 @@ public class MainCoursesComponents extends BaseComponents {
     }
 
 
-
-    public String getCourseName(WebElement element){
+    public String getCourseName(WebElement element) {
         WebElement currentElement = CustomAndDefaultWait.waitForElementVisible(element, driver);
         return getElementTextByCss(currentElement, COURSE_NAME);
     }
