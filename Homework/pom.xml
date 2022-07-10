@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>otus.java.qa.professional.homework</groupId>
+    <artifactId>OTUS_Project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <properties>
+        <webdriver.manager.version>5.2.0</webdriver.manager.version>
+        <selenium.java.version>3.141.59</selenium.java.version>
+        <testng.version>6.14.3</testng.version>
+        <faker.version>1.0.1</faker.version>
+        <dotenv>5.2.2</dotenv>
+
+        <browser>chrome</browser>
+        <browser>firefox</browser>
+        <browser>opera</browser>
+        <webdriver.base.url>https://otus.ru</webdriver.base.url>
+        <wait.for.element.timeout.seconds>10</wait.for.element.timeout.seconds>
+        <polling.every.in.millis>200</polling.every.in.millis>
+        <test.project.language>RU</test.project.language>
+
+        <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
+
+        <surefire.plugin.version>2.19.1</surefire.plugin.version>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+        <maven.compile.encoding>UTF-8</maven.compile.encoding>
+        <java.version>18</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>${dotenv}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdriver.manager.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${faker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-utils</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <properties>
+                <url>https://otus.ru</url>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.plugin.version}</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <browser>${browser}</browser>
+                            <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
+                            </webdriver.timeouts.implicitlywait>
+                            <test.project.status>test</test.project.status>
+                            <test.project.language>${test.project.language}</test.project.language>
+                        </systemPropertyVariables>
+                        <systemProperties>
+                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
+                            </wait.for.element.timeout.seconds>
+                            <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
+                        </systemProperties>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>
