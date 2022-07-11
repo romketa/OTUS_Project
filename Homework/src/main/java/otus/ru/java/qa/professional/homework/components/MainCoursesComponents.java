@@ -7,11 +7,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import otus.ru.java.qa.professional.homework.actions.BaseActions;
 import otus.ru.java.qa.professional.homework.data.LessonType;
 import otus.ru.java.qa.professional.homework.listeners.SpecialEventListener;
+import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 import otus.ru.java.qa.professional.homework.waiters.CustomAndDefaultWait;
+
+import javax.inject.Inject;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withMarginOf;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,8 +33,10 @@ public class MainCoursesComponents extends BaseComponents {
     @FindBy(css = ".lessons__new-item")
     private List<WebElement> elCoursesList;
 
-    public MainCoursesComponents(WebDriver driver) {
-        super(driver);
+
+    @Inject
+    public MainCoursesComponents(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public MainCoursesComponents filterByCourseName(String nameOfCourse) {
@@ -101,37 +108,42 @@ public class MainCoursesComponents extends BaseComponents {
 
     public MainCoursesComponents moveToElementAndHighlight(WebElement element) {
         SpecialEventListener specialEventListener = new SpecialEventListener();
-        WebElement currentElement = CustomAndDefaultWait.waitForElementVisible(element, driver);
-        specialEventListener.scrollIntoView(element, driver);
-        BaseActions.moveToElementAction(currentElement, driver);
-        specialEventListener.beforeClickOn(currentElement, driver);
-        specialEventListener.afterClickOn(currentElement, driver);
+        WebElement currentElement = CustomAndDefaultWait.waitForElementVisible(element, guiceScoped.driver);
+        specialEventListener.scrollIntoView(element, guiceScoped.driver);
+        BaseActions.moveToElementAction(currentElement, guiceScoped.driver);
+        specialEventListener.beforeClickOn(currentElement, guiceScoped.driver);
+        specialEventListener.afterClickOn(currentElement, guiceScoped.driver);
         return this;
     }
 
 
     public String getCourseName(WebElement element) {
-        WebElement currentElement = CustomAndDefaultWait.waitForElementVisible(element, driver);
+        WebElement currentElement = CustomAndDefaultWait.waitForElementVisible(element, guiceScoped.driver);
         return getElementTextByCss(currentElement, COURSE_NAME);
     }
 
     public MainCoursesComponents clickByElement(WebElement element) {
-        BaseActions.clickByElementAction(element, driver);
-        CustomAndDefaultWait.waitForElementInvisible(element, driver);
+        BaseActions.clickByElementAction(element, guiceScoped.driver);
+        CustomAndDefaultWait.waitForElementInvisible(element, guiceScoped.driver);
         return this;
     }
 
     public void checkCourseName(String courseName, LessonCourseComponents lessonCourseComponents) {
         if (courseName.startsWith(LessonType.SPECIALIZATIONS.getName())) {
-            Assert.assertEquals(courseName, lessonCourseComponents.getSpecializationName(), "|-------|-------| Tittle on a page Specialization isn't correct");
+            assertThat(courseName)
+                    .as("|-------|-------| Tittle {} on a page Specialization isn't correct", lessonCourseComponents.getSpecializationName())
+                    .isEqualTo(lessonCourseComponents.getSpecializationName());
         } else {
-            Assert.assertEquals(courseName, lessonCourseComponents.getCourseName(), "|-------|-------| Tittle on a page Course isn't correct");
+            assertThat(courseName)
+                    .as("|-------|-------| Tittle {} on a page Specialization isn't correct", lessonCourseComponents.getCourseName())
+                    .isEqualTo(lessonCourseComponents.getCourseName());
         }
         System.out.println("|-------|-------| Course name is correctly displayed");
     }
 
     public MainCoursesComponents checkThatCourseExistOnPage(WebElement element) {
-        Assert.assertEquals(element, CustomAndDefaultWait.waitForCourseName(element, driver));
+        assertThat(element)
+                .isEqualTo(CustomAndDefaultWait.waitForCourseName(element, guiceScoped.driver));
         return this;
     }
 }

@@ -12,9 +12,16 @@
     <properties>
         <webdriver.manager.version>5.2.0</webdriver.manager.version>
         <selenium.java.version>3.141.59</selenium.java.version>
-        <testng.version>6.14.3</testng.version>
+        <junit.version>5.8.1</junit.version>
+        <jupiter.version>5.8.1</jupiter.version>
         <faker.version>1.0.1</faker.version>
         <dotenv>5.2.2</dotenv>
+        <assertj.version>3.23.1</assertj.version>
+        <project.lombok>1.18.12</project.lombok>
+        <cucumber.junit.version>5.5.0</cucumber.junit.version>
+        <cucumber.java.version>5.5.0</cucumber.java.version>
+        <cucumber.guice.version>5.5.0</cucumber.guice.version>
+        <google.inject>5.1.0</google.inject>
 
         <browser>chrome</browser>
         <browser>firefox</browser>
@@ -26,7 +33,7 @@
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
 
-        <surefire.plugin.version>2.19.1</surefire.plugin.version>
+        <surefire.plugin.version>2.22.2</surefire.plugin.version>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -55,9 +62,16 @@
             <version>${selenium.java.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junit.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${jupiter.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -67,18 +81,38 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
+            <version>${assertj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok-utils</artifactId>
-            <version>1.18.12</version>
+            <version>${project.lombok}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${cucumber.guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${google.inject}</version>
         </dependency>
     </dependencies>
 
     <profiles>
         <profile>
-            <id>test</id>
+            <id>production</id>
             <properties>
                 <url>https://otus.ru</url>
             </properties>
@@ -93,6 +127,12 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.plugin.version}</version>
                     <configuration>
+                        <systemProperties>
+                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
+                            </wait.for.element.timeout.seconds>
+                            <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
+                        </systemProperties>
                         <systemPropertyVariables>
                             <browser>${browser}</browser>
                             <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
@@ -100,22 +140,10 @@
                             <test.project.status>test</test.project.status>
                             <test.project.language>${test.project.language}</test.project.language>
                         </systemPropertyVariables>
-                        <systemProperties>
-                            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                            <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
-                            </wait.for.element.timeout.seconds>
-                            <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
-                        </systemProperties>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
 </project>

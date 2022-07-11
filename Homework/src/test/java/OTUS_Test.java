@@ -1,44 +1,52 @@
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.*;
 import otus.ru.java.qa.professional.homework.components.LessonCourseComponents;
 import otus.ru.java.qa.professional.homework.components.MainCoursesComponents;
 import otus.ru.java.qa.professional.homework.po.BasePage;
+import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 
 public class OTUS_Test extends BaseTest{
 
-    @Test(description = "Check filtering by Name", priority = 1)
+
+
+    @DisplayName("Check filtering by Name")
+    @Order(1)
     public void checkFilteringCourseByName() {
 
         String filterByCourseName = System.getProperty("filterByCourseName");
-        new MainCoursesComponents(driver)
+        new MainCoursesComponents(guiceScoped)
                 .filterByCourseName(filterByCourseName);
     }
 
-    @Test(description = "Check selecting earlier Course", priority = 2)
+    @DisplayName("Check selecting earlier Course")
+    @Order(2)
     public void checkSelectingEarlierCourse() {
 
-        MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
+        MainCoursesComponents coursesComponents = new MainCoursesComponents(guiceScoped);
         WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(true);
         String courseName = coursesComponents.getCourseName(selectedCourse);
         coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)
                 .moveToElementAndHighlight(selectedCourse)
                 .clickByElement(selectedCourse);
-        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(driver));
+        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(guiceScoped));
     }
 
-    @Test(description = "Check selecting later Course", priority = 3)
+    @DisplayName("Check selecting later Course")
+    @Order(3)
     public void checkSelectingLaterCourse() {
 
-        BasePage.openSite(driver);
-        MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
+        MainCoursesComponents coursesComponents = new MainCoursesComponents(guiceScoped);
         WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(false);
         String courseName = coursesComponents.getCourseName(selectedCourse);
         coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)
                 .moveToElementAndHighlight(selectedCourse)
                 .clickByElement(selectedCourse);
-        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(driver));;
+        coursesComponents.checkCourseName(courseName, new LessonCourseComponents(guiceScoped));;
     }
 
 }
