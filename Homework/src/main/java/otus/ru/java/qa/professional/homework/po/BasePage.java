@@ -61,9 +61,9 @@ public abstract class BasePage<T> {
         hostname = hostname.replaceAll("/+$", "");
 
         if(!this.getPath().isEmpty()) {
-            guiceScoped.driver.get(hostname + this.getPath() + "/" + pathFromTemplate);
+            guiceScoped.driver.get(hostname + this.getPath() + pathFromTemplate);
         } else {
-            guiceScoped.driver.get(hostname + "/" + pathFromTemplate);
+            guiceScoped.driver.get(hostname + pathFromTemplate);
         }
 
         return (T)this;
@@ -71,6 +71,12 @@ public abstract class BasePage<T> {
 
     public T open() {
         guiceScoped.driver.get(System.getProperty("webdriver.base.url"));
+
+        return (T) this;
+    }
+
+    public T open(String url) {
+        guiceScoped.driver.get(url);
 
         return (T) this;
     }

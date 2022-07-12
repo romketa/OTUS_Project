@@ -29,6 +29,7 @@
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
         <wait.for.element.timeout.seconds>10</wait.for.element.timeout.seconds>
         <polling.every.in.millis>200</polling.every.in.millis>
+        <webdriver.timeouts.implicitlywait>5</webdriver.timeouts.implicitlywait>
         <test.project.language>RU</test.project.language>
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
@@ -132,14 +133,10 @@
                             <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
                             </wait.for.element.timeout.seconds>
                             <polling.every.in.millis>${polling.every.in.millis}</polling.every.in.millis>
-                        </systemProperties>
-                        <systemPropertyVariables>
-                            <browser>${browser}</browser>
                             <webdriver.timeouts.implicitlywait>${webdriver.timeouts.implicitlywait}
                             </webdriver.timeouts.implicitlywait>
-                            <test.project.status>test</test.project.status>
-                            <test.project.language>${test.project.language}</test.project.language>
-                        </systemPropertyVariables>
+                            <browser>${browser}</browser>
+                        </systemProperties>
                     </configuration>
                 </plugin>
             </plugins>

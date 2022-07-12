@@ -1,14 +1,17 @@
 package otus.ru.java.qa.professional.homework.hooks;
 
+import com.google.inject.Inject;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
-
-import javax.inject.Inject;
 
 public class Hooks {
 
     @Inject
     public GuiceScoped guiceScoped;
 
+
+    @After
     public void tearDown() {
         if (guiceScoped.driver != null) {
             guiceScoped.driver.close();

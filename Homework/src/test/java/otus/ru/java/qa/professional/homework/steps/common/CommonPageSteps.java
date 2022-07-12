@@ -9,12 +9,13 @@ import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 import java.util.Locale;
 
 public class CommonPageSteps {
+
     @Inject
     private DriverFactoryImpl driverFactory;
     @Inject
     private GuiceScoped guiceScoped;
 
-    @Пусть("Я открываю браузер ")
+    @Пусть("Я открываю браузер {string}")
     public void initBrowser(String browserName) {
         BrowserData browserData = BrowserData.valueOf(browserName.toUpperCase(Locale.ROOT));
         guiceScoped.browserName = browserData;

@@ -1,16 +1,15 @@
 package otus.ru.java.qa.professional.homework.po;
 
+import com.google.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import otus.ru.java.qa.professional.homework.annotations.Component;
 import otus.ru.java.qa.professional.homework.annotations.PagePath;
 import otus.ru.java.qa.professional.homework.annotations.navigation.Url;
 import otus.ru.java.qa.professional.homework.annotations.navigation.UrlTemplate;
-import otus.ru.java.qa.professional.homework.components.LessonCourseComponents;
 import otus.ru.java.qa.professional.homework.data.LessonType;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
-
-import javax.inject.Inject;
+import otus.ru.java.qa.professional.homework.waiters.CustomAndDefaultWait;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,26 +20,45 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LessonPage extends BasePage<LessonPage> {
 
     @Inject
-    LessonCourseComponents lessonCourseComponents;
-
-    @Inject
     public LessonPage(GuiceScoped guiceScoped) {
         super(guiceScoped);
     }
 
-    public LessonPage lessonPageHeaderShouldBeAs(String header){
+    @Inject
+    private CustomAndDefaultWait wait;
+
+    @FindBy(css = ".course-header2__title")
+    private WebElement courseName;
+
+    public String getCourseName() {
+        wait.waitForElementVisible(courseName, guiceScoped.driver);
+        return courseName.getText();
+    }
+
+    public String getSpecializationName(){
+        return guiceScoped.driver.getTitle();
+    }
+
+    public void lessonPageHeaderShouldBeAs(String header){
         if (header.startsWith(LessonType.SPECIALIZATIONS.getName())) {
-            assertThat(lessonCourseComponents.getSpecializationName())
+            assertThat(getSpecializationName())
                     .as("|-------|-------| Tittle {} on a page Specialization isn't correct", header)
                     .isEqualTo(header);
         } else {
-            assertThat(lessonCourseComponents.getCourseName())
+            assertThat(getCourseName())
                     .as("|-------|-------| Tittle {} on a page Specialization isn't correct", header)
                     .isEqualTo(header);
         }
         System.out.println("|-------|-------| Course name is correctly displayed");
-        return this;
     }
 
+    @NotNull
+    private LessonType getLessonType(String lesson) {
+        LessonType lessonType = null;
+        if(lesson.startsWith(LessonType.SPECIALIZATIONS.getName())){
+            lessonType = LessonType.SPECIALIZATIONS;
+        } else lessonType = LessonType.COURSES;
+        return lessonType;
+    }
 
 }
