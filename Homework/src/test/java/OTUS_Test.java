@@ -18,7 +18,7 @@ public class OTUS_Test extends BaseTest{
     public void checkSelectingEarlierCourse() {
 
         MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
-        WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(true);
+        WebElement selectedCourse = coursesComponents.getEarlyDateCourse();
         String courseName = coursesComponents.getCourseName(selectedCourse);
         coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)
@@ -32,7 +32,7 @@ public class OTUS_Test extends BaseTest{
 
         BasePage.openSite(driver);
         MainCoursesComponents coursesComponents = new MainCoursesComponents(driver);
-        WebElement selectedCourse = coursesComponents.getEarlyOrLaterCourse(false);
+        WebElement selectedCourse = coursesComponents.getOlderDateCourse();
         String courseName = coursesComponents.getCourseName(selectedCourse);
         coursesComponents
                 .checkThatCourseExistOnPage(selectedCourse)

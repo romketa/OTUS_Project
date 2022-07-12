@@ -1,8 +1,6 @@
 package otus.ru.java.qa.professional.homework.components;
 
 
-import com.mifmif.common.regex.Main;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,36 +34,49 @@ public class MainCoursesComponents extends BaseComponents {
         System.out.println("|-------|-------| Courses have been filtered by input name:");
         elCoursesList.stream()
                 .filter(element -> getElementTextByCss(element, COURSE_NAME).contains(nameOfCourse))
-                .map(element -> getElementTextByCss(element, COURSE_NAME))
-                .forEach(s -> System.out.println("|-------|-------| " + s));
+                .forEach(s -> System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME)));
         return this;
     }
 
-    public WebElement getEarlyOrLaterCourse(Boolean byDate) {
-        System.out.println(byDate ? "|-------|-------| Looking for earlier course" : "|-------|-------| Looking for later course");
+    public WebElement getEarlyDateCourse() {
+        System.out.println("|-------|-------| Looking for earlier course");
 
         var currentWebElement = elCoursesList.stream()
                 .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
                 .reduce((el1, el2) -> {
                     Date dateFirstElementDate = getDate(el1);
                     Date dateSecondElementDate = getDate(el2);
-                    if (byDate) {
-                        if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
-                        else return el2;
-                    } else if (!byDate) {
-                        if (dateFirstElementDate.compareTo(dateSecondElementDate) > 0) return el1;
-                        else return el2;
-                    } else {
-                        return el1;
-                    }
+                    if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
+                    else return el2;
                 });
-        String selectedCourse = currentWebElement.map(element -> getElementTextByCss(element, COURSE_NAME)).get();
-        String date;
-        if (currentWebElement.get().findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
-            date = currentWebElement.map(element -> getElementTextByCss(element, LESSON_DATE_SPECIALIZATION)).get();
-        } else date = currentWebElement.map(element -> getElementTextByCss(element, LESSON_DATE_COURSE)).get();
-        System.out.println("|-------|-------| " + selectedCourse + " has been selected! Date of start is " + date);
+        currentWebElement.stream()
+                .forEach(s -> {
+                    if (getElementTextByCss(s, COURSE_NAME).startsWith(LessonType.SPECIALIZATIONS.getName())) {
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
+                    } else
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_COURSE));
+                });
+        return currentWebElement.get();
+    }
 
+    public WebElement getOlderDateCourse() {
+        System.out.println("|-------|-------| Looking for later course");
+
+        var currentWebElement = elCoursesList.stream()
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
+                .reduce((el1, el2) -> {
+                    Date dateFirstElementDate = getDate(el1);
+                    Date dateSecondElementDate = getDate(el2);
+                    if (dateFirstElementDate.compareTo(dateSecondElementDate) > 0) return el1;
+                    else return el2;
+                });
+        currentWebElement.stream()
+                .forEach(s -> {
+                    if (getElementTextByCss(s, COURSE_NAME).startsWith(LessonType.SPECIALIZATIONS.getName())) {
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
+                    } else
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_COURSE));
+                });
         return currentWebElement.get();
     }
 
