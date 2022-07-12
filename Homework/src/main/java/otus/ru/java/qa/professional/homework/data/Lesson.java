@@ -2,27 +2,25 @@ package otus.ru.java.qa.professional.homework.data;
 
 import io.cucumber.guice.ScenarioScoped;
 
+import java.util.Date;
+
 public class Lesson {
 
     private String name;
 
     private String href;
 
+    private Date date;
+
+
+    public Lesson(String name, String href, Date date) {
+        this.name = name;
+        this.href = href;
+        this.date = date;
+    }
 
     public Lesson(String name, String href) {
         this.name = name;
-        this.href = href;
-    }
-
-    public Lesson(){
-
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setHref(String href) {
         this.href = href;
     }
 
@@ -32,6 +30,10 @@ public class Lesson {
 
     public String getName() {
         return name;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
 }

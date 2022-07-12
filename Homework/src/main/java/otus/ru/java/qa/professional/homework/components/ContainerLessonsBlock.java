@@ -2,8 +2,10 @@ package otus.ru.java.qa.professional.homework.components;
 
 
 import com.google.inject.Inject;
+import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import otus.ru.java.qa.professional.homework.actions.BaseActions;
 import otus.ru.java.qa.professional.homework.annotations.Component;
 import otus.ru.java.qa.professional.homework.data.Lesson;
@@ -27,9 +29,10 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
 
     private static final String COURSE_NAME = ".lessons__new-item-title";
 
-    private List<WebElement> elCoursesList;
+    private static final String LESSON_LIST = ".lessons__new-item";
 
-    private String lessonList = ".lessons__new-item";
+    @FindBy(css = ".lessons__new-item")
+    private List<WebElement> elCoursesList;
 
     @Inject
     public ContainerLessonsBlock(GuiceScoped guiceScoped) {
@@ -53,12 +56,7 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
     }
 
     public Lesson findLessonInBlock(String nameOfCourse) {
-        List<WebElement> initElements = null;
-        try {
-            initElements = wait.waitForElementsVisible(this.getComponentEntity().findElements(By.cssSelector(lessonList)), guiceScoped.driver);
-        } catch (ComponentLocatorException e) {
-            System.out.println(e.getMessage());
-        }
+        List<WebElement> initElements = getInitElements();
 
         try {
             WebElement currentWebElement = initElements.stream()
@@ -73,6 +71,35 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
             System.out.println("Looking '" + nameOfCourse + "' lesson is not present on main page");
         }
         return null;
+    }
+
+    public Lesson findLessonInBlockByDate(Date date){
+
+        List<WebElement> initElements = getInitElements();
+
+        initElements.stream()
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
+                .reduce(new Date(), (el1, el2)  -> {
+                    Date dateFirstElementDate = getDate(el1);
+                    Date dateSecondElementDate = getDate(el2);
+                        if (dateSecondElementDate.compareTo(date) == 0){
+                            return el2;
+                        }
+                })
+
+
+        return null;
+    }
+
+    @Nullable
+    private List<WebElement> getInitElements() {
+        List<WebElement> initElements = null;
+        try {
+            initElements = wait.waitForElementsVisible(this.getComponentEntity().findElements(By.cssSelector(LESSON_LIST)), guiceScoped.driver);
+        } catch (ComponentLocatorException e) {
+            System.out.println(e.getMessage());
+        }
+        return initElements;
     }
 
     public WebElement getEarlyOrLaterCourse(Boolean byDate) {
