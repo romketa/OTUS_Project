@@ -2,8 +2,8 @@ package otus.ru.java.qa.professional.homework.steps.pages;
 
 import com.google.inject.Inject;
 import io.cucumber.java.ht.Le;
-import io.cucumber.java.ru.Р;
-import io.cucumber.java.ru.РўРѕРіРґР°;
+import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Тогда;
 import otus.ru.java.qa.professional.homework.components.ContainerLessonsBlock;
 import otus.ru.java.qa.professional.homework.data.Lesson;
 import otus.ru.java.qa.professional.homework.po.LessonPage;
@@ -18,12 +18,12 @@ public class LessonPageSteps {
     @Inject
     private World world;
 
-    @Р("РџРµСЂРµР№С‚Рё РЅР° СЃС‚СЂР°РЅРёС†Сѓ СѓСЂРѕРєР°")
+    @И("Перейти на страницу урока")
     public void goToLessonPage() {
         lessonPage.open(world.lesson.getHref());
     }
 
-    @РўРѕРіРґР°("РќР° СЃС‚СЂР°РЅРёС†Рµ СѓСЂРѕРєР° РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ Р·Р°РіРѕР»РѕРІРѕРє СѓСЂРѕРєР°")
+    @Тогда("На странице урока отображается заголовок урока")
     public void lessonPageIsOpened(){
         lessonPage.lessonPageHeaderShouldBeAs(world.lesson.getName());
     }

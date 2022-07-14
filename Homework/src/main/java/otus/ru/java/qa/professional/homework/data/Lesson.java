@@ -1,7 +1,9 @@
 package otus.ru.java.qa.professional.homework.data;
 
 import io.cucumber.guice.ScenarioScoped;
+import net.bytebuddy.asm.Advice;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Lesson {
@@ -10,10 +12,10 @@ public class Lesson {
 
     private String href;
 
-    private Date date;
+    private LocalDate date;
 
 
-    public Lesson(String name, String href, Date date) {
+    public Lesson(String name, String href, LocalDate date) {
         this.name = name;
         this.href = href;
         this.date = date;
@@ -32,7 +34,7 @@ public class Lesson {
         return name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

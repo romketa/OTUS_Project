@@ -14,6 +14,7 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
         <jupiter.version>5.8.1</jupiter.version>
+        <junit-platform-suite.version>1.8.2</junit-platform-suite.version>
         <faker.version>1.0.1</faker.version>
         <dotenv>5.2.2</dotenv>
         <assertj.version>3.23.1</assertj.version>
@@ -39,6 +40,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 
+        <encoding.type>UTF-8</encoding.type>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
@@ -109,6 +111,12 @@
             <artifactId>guice</artifactId>
             <version>${google.inject}</version>
         </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.5</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -137,6 +145,18 @@
                             </webdriver.timeouts.implicitlywait>
                             <browser>${browser}</browser>
                         </systemProperties>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <properties>
+                            <configurationParameters>
+                                cucumber.junit-platform.naming-strategy=long
+                            </configurationParameters>
+                        </properties>
                     </configuration>
                 </plugin>
             </plugins>

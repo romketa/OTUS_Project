@@ -1,12 +1,18 @@
 package otus.ru.java.qa.professional.homework.steps.components;
 
 import com.google.inject.Inject;
-import io.cucumber.java.ru.Р•СЃР»Рё;
+import cucumber.api.Format;
+
+import io.cucumber.java.ru.Если;
+import io.cucumber.java.ru.Тогда;
 import otus.ru.java.qa.professional.homework.components.ContainerLessonsBlock;
-import otus.ru.java.qa.professional.homework.exceptions.ComponentLocatorException;
 import otus.ru.java.qa.professional.homework.steps.World;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ContainerLessonsBlockSteps {
 
@@ -20,15 +26,21 @@ public class ContainerLessonsBlockSteps {
     @Inject
     private ContainerLessonsBlock containerLessonsBlock;
 
-    @Р•СЃР»Рё("РќР°Р№С‚Рё РєСѓСЂСЃ {string} РЅР° РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†Рµ")
+    @Если("Найти курс {string} на главной странице")
     public void findLessonOnMainPage(String courseName) {
-        System.out.println("|-------|-------| РќР°С‡РёРЅР°РµРј РїРѕРёСЃРє СѓРєР°Р·Р°РЅРЅРѕРіРѕ РєСѓСЂСЃР°: ");
+        System.out.println("|-------|-------| Начинаем поиск указанного курса: ");
         world.lesson = containerLessonsBlock.findLessonInBlock(courseName);
-        System.out.println("|-------|-------| РљСѓСЂСЃ Р±С‹Р» РЅР°Р№РґРµРЅ: " + world.lesson.getName());
+        System.out.println("|-------|-------| Курс был найден: " + world.lesson.getName());
     }
 
-    @Р•СЃР»Рё("РќР°Р№С‚Рё РєСѓСЂСЃ РїРѕ РґР°С‚Рµ (.+) РёР»Рё РїРѕР·Р¶Рµ СЌС‚РѕР№ РґР°С‚С‹, РµСЃР»Рё РєСѓСЂСЃР° Р·Р° СѓРєР°Р·Р°РЅРЅСѓСЋ РґР°С‚Сѓ РЅРµС‚")
-    public void findLessonByDate(Date date){
+    @Если("Найти курс по дате {string} или позже этой даты, если курса за указанную дату нет")
+    public void findLessonByDate(String sDate){
+        world.lesson = containerLessonsBlock.findLessonInBlockByLocalDate(sDate);
+    }
 
+    
+    @Тогда("Вывести найденный курс на консоль")
+    public void printOutLesson(){
+        System.out.println("Курс - " + world.lesson.getName() + " Дата старта - " + world.lesson.getDate());
     }
 }

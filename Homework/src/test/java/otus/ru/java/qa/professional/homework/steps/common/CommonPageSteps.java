@@ -1,7 +1,7 @@
 package otus.ru.java.qa.professional.homework.steps.common;
 
 import com.google.inject.Inject;
-import io.cucumber.java.ru.РџСѓСЃС‚СЊ;
+import io.cucumber.java.ru.Пусть;
 import otus.ru.java.qa.professional.homework.data.BrowserData;
 import otus.ru.java.qa.professional.homework.driver.DriverFactoryImpl;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
@@ -15,7 +15,7 @@ public class CommonPageSteps {
     @Inject
     private GuiceScoped guiceScoped;
 
-    @РџСѓСЃС‚СЊ("РЇ РѕС‚РєСЂС‹РІР°СЋ Р±СЂР°СѓР·РµСЂ {string}")
+    @Пусть("Я открываю браузер {string}")
     public void initBrowser(String browserName) {
         BrowserData browserData = BrowserData.valueOf(browserName.toUpperCase(Locale.ROOT));
         guiceScoped.browserName = browserData;

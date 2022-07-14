@@ -18,6 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.*;
 
 @Component(".container-lessons")
@@ -73,22 +77,45 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
         return null;
     }
 
-    public Lesson findLessonInBlockByDate(Date date){
 
+    private LocalDate getLocalDate(String date) {
+        Locale loc_rus = new Locale("ru", "RU");
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("d[uu]-MM-yyyy", loc_rus);
+        return LocalDate.parse(date, dtf1);
+    }
+
+    public Lesson findLessonInBlockByDate(Date date) {
         List<WebElement> initElements = getInitElements();
-
-        initElements.stream()
-                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[Ð-Ð¯].*[Ð°-Ñ]"))
-                .reduce(new Date(), (el1, el2)  -> {
+        var currentWebElement = initElements.stream()
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[À-ß].*[à-ÿ]"))
+                .filter(element -> getDate(element).getTime() >= date.getTime())
+                .reduce((el1, el2) -> {
                     Date dateFirstElementDate = getDate(el1);
                     Date dateSecondElementDate = getDate(el2);
-                        if (dateSecondElementDate.compareTo(date) == 0){
-                            return el2;
-                        }
-                })
+                    if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
+                    else return el2;
+                }).get();
+        String lessonName = getElementTextByCss(currentWebElement, COURSE_NAME);
+        String href = currentWebElement.getAttribute("href");
+        return new Lesson(lessonName, href);
+    }
 
-
-        return null;
+    public Lesson findLessonInBlockByLocalDate(String sDate) {
+        LocalDate lDate = getLocalDate(sDate);
+        List<WebElement> initElements = getInitElements();
+        var currentWebElement = initElements.stream()
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[À-ß].*[à-ÿ]"))
+                .filter(element -> getDateToLocalDate(element).isAfter(lDate) || getDateToLocalDate(element).isEqual(lDate))
+                .reduce((el1, el2) -> {
+                    LocalDate dateFirstElementDate = getDateToLocalDate(el1);
+                    LocalDate dateSecondElementDate = getDateToLocalDate(el2);
+                    if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
+                    else return el2;
+                }).get();
+        String lessonName = getElementTextByCss(currentWebElement, COURSE_NAME);
+        String href = currentWebElement.getAttribute("href");
+        LocalDate currentDate = getDateToLocalDate(currentWebElement);
+        return new Lesson(lessonName, href, currentDate);
     }
 
     @Nullable
@@ -102,14 +129,14 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
         return initElements;
     }
 
-    public WebElement getEarlyOrLaterCourse(Boolean byDate) {
+    /*public WebElement getEarlyOrLaterCourse(Boolean byDate) {
         System.out.println(byDate ? "|-------|-------| Looking for earlier course" : "|-------|-------| Looking for later course");
 
         var currentWebElement = elCoursesList.stream()
-                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[Ð-Ð¯].*[Ð°-Ñ]"))
+                .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[À-ß].*[à-ÿ]"))
                 .reduce((el1, el2) -> {
-                    Date dateFirstElementDate = getDate(el1);
-                    Date dateSecondElementDate = getDate(el2);
+                    LocalDate dateFirstElementDate = getDate(el1);
+                    LocalDate dateSecondElementDate = getDate(el2);
                     if (byDate) {
                         if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
                         else return el2;
@@ -128,6 +155,15 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
         System.out.println("|-------|-------| " + selectedCourse + " has been selected! Date of start is " + date);
 
         return currentWebElement.get();
+    }*/
+
+    private LocalDate toDate2(String sDate) {
+        Locale loc_rus = new Locale("ru", "RU");
+        DateTimeFormatter dtf1 = new DateTimeFormatterBuilder()
+                .appendPattern("d[uu] MMMM")
+                .parseDefaulting(ChronoField.YEAR, 2022)
+                .toFormatter(loc_rus);
+        return LocalDate.parse(sDate, dtf1);
     }
 
     private Date toDate(String sDate) throws ParseException {
@@ -140,25 +176,36 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
     }
 
     private Date getDate(WebElement element) {
-        Date currentDate = new Date();
         if (element.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
             String[] date = getElementTextByCss(element, LESSON_DATE_SPECIALIZATION).split(" ");
             try {
-                currentDate = toDate(date[0] + " " + date[1]);
+                return toDate(date[0] + " " + date[1]);
             } catch (ParseException e) {
+                e.getCause();
                 System.out.println(e.getMessage());
                 System.out.println("Date " + date[0] + " " + date[1] + " is incorrect parsed");
             }
         } else {
             try {
-                currentDate = toDate(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
+                return toDate(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
             } catch (ParseException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Date " + getElementTextByCss(element, LESSON_DATE_COURSE) + " is incorrect parsed");
             }
         }
-        return currentDate;
+        return null;
     }
+
+    private LocalDate getDateToLocalDate(WebElement element) {
+        if (element.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
+            String[] date = getElementTextByCss(element, LESSON_DATE_SPECIALIZATION).split(" ");
+            return toDate2(date[0] + " " + date[1]);
+        } else {
+            return toDate2(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
+        }
+
+    }
+
 
     public ContainerLessonsBlock moveToElementAndHighlight(WebElement element) {
         SpecialEventListener specialEventListener = new SpecialEventListener();
