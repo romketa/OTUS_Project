@@ -1,10 +1,8 @@
 package otus.ru.java.qa.professional.homework.data;
 
-import io.cucumber.guice.ScenarioScoped;
-import net.bytebuddy.asm.Advice;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class Lesson {
 
@@ -13,6 +11,8 @@ public class Lesson {
     private String href;
 
     private LocalDate date;
+
+    private int price;
 
 
     public Lesson(String name, String href, LocalDate date) {
@@ -24,6 +24,15 @@ public class Lesson {
     public Lesson(String name, String href) {
         this.name = name;
         this.href = href;
+    }
+
+    public Lesson(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public String getHref() {

@@ -61,9 +61,9 @@ public abstract class BasePage<T> {
         hostname = hostname.replaceAll("/+$", "");
 
         if(!this.getPath().isEmpty()) {
-            guiceScoped.driver.get(hostname + this.getPath() + pathFromTemplate);
+            guiceScoped.driver.get(hostname + this.getPath() + "/" + pathFromTemplate);
         } else {
-            guiceScoped.driver.get(hostname + pathFromTemplate);
+            guiceScoped.driver.get(hostname + "/" + pathFromTemplate);
         }
 
         return (T)this;

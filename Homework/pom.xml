@@ -136,6 +136,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.plugin.version}</version>
                     <configuration>
+                        <encoding>UTF-8</encoding>
                         <systemProperties>
                             <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                             <wait.for.element.timeout.seconds>${wait.for.element.timeout.seconds}
@@ -145,18 +146,6 @@
                             </webdriver.timeouts.implicitlywait>
                             <browser>${browser}</browser>
                         </systemProperties>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <configuration>
-                        <properties>
-                            <configurationParameters>
-                                cucumber.junit-platform.naming-strategy=long
-                            </configurationParameters>
-                        </properties>
                     </configuration>
                 </plugin>
             </plugins>

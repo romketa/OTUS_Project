@@ -2,7 +2,6 @@ package otus.ru.java.qa.professional.homework.hooks;
 
 import com.google.inject.Inject;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 
 public class Hooks {
