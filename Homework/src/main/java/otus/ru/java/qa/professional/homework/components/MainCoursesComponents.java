@@ -13,6 +13,10 @@ import otus.ru.java.qa.professional.homework.waiters.CustomAndDefaultWait;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.*;
 
 public class MainCoursesComponents extends BaseComponents {
@@ -44,17 +48,17 @@ public class MainCoursesComponents extends BaseComponents {
         var currentWebElement = elCoursesList.stream()
                 .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
                 .reduce((el1, el2) -> {
-                    Date dateFirstElementDate = getDate(el1);
-                    Date dateSecondElementDate = getDate(el2);
+                    LocalDate dateFirstElementDate = getDate(el1);
+                    LocalDate dateSecondElementDate = getDate(el2);
                     if (dateFirstElementDate.compareTo(dateSecondElementDate) < 0) return el1;
                     else return el2;
                 });
         currentWebElement.stream()
                 .forEach(s -> {
                     if (getElementTextByCss(s, COURSE_NAME).startsWith(LessonType.SPECIALIZATIONS.getName())) {
-                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is " + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
                     } else
-                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_COURSE));
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is " + getElementTextByCss(s, LESSON_DATE_COURSE));
                 });
         return currentWebElement.get();
     }
@@ -65,49 +69,42 @@ public class MainCoursesComponents extends BaseComponents {
         var currentWebElement = elCoursesList.stream()
                 .filter(element -> !element.findElement(By.cssSelector(LESSON_DATE_SPECIALIZATION)).getText().matches("^[А-Я].*[а-я]"))
                 .reduce((el1, el2) -> {
-                    Date dateFirstElementDate = getDate(el1);
-                    Date dateSecondElementDate = getDate(el2);
+                    LocalDate dateFirstElementDate = getDate(el1);
+                    LocalDate dateSecondElementDate = getDate(el2);
                     if (dateFirstElementDate.compareTo(dateSecondElementDate) > 0) return el1;
                     else return el2;
                 });
         currentWebElement.stream()
                 .forEach(s -> {
                     if (getElementTextByCss(s, COURSE_NAME).startsWith(LessonType.SPECIALIZATIONS.getName())) {
-                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is " + getElementTextByCss(s, LESSON_DATE_SPECIALIZATION));
                     } else
-                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is" + getElementTextByCss(s, LESSON_DATE_COURSE));
+                        System.out.println("|-------|-------| " + getElementTextByCss(s, COURSE_NAME) + " has been selected! Date of start is " + getElementTextByCss(s, LESSON_DATE_COURSE));
                 });
         return currentWebElement.get();
     }
 
-    private Date toDate(String sDate) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM", new Locale("ru"));
-        return simpleDateFormat.parse(sDate);
+    private LocalDate fromStringToLocalDate(String sDate) {
+        Locale loc_rus = new Locale("ru", "RU");
+        DateTimeFormatter dtf1 = new DateTimeFormatterBuilder()
+                .appendPattern("d[uu] MMMM")
+                .parseDefaulting(ChronoField.YEAR, 2022)
+                .toFormatter(loc_rus);
+        return LocalDate.parse(sDate, dtf1);
     }
 
     private String getElementTextByCss(WebElement element, String lessonDate) {
         return element.findElement(By.cssSelector(lessonDate)).getText();
     }
 
-    private Date getDate(WebElement element) {
-        Date currentDate = new Date();
+    private LocalDate getDate(WebElement element) {
         if (element.findElements(By.cssSelector(LESSON_DATE_COURSE)).size() == 0) {
             String[] date = getElementTextByCss(element, LESSON_DATE_SPECIALIZATION).split(" ");
-            try {
-                currentDate = toDate(date[0] + " " + date[1]);
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Date " + date[0] + " " + date[1] + " is incorrect parsed");
-            }
+                return fromStringToLocalDate(date[0] + " " + date[1]);
+
         } else {
-            try {
-                currentDate = toDate(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Date " + getElementTextByCss(element, LESSON_DATE_COURSE) + " is incorrect parsed");
-            }
+                return fromStringToLocalDate(getElementTextByCss(element, LESSON_DATE_COURSE).substring(2));
         }
-        return currentDate;
     }
 
     public MainCoursesComponents moveToElementAndHighlight(WebElement element) {
