@@ -13,6 +13,8 @@ import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 import otus.ru.java.qa.professional.homework.waiters.CustomAndDefaultWait;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.shouldHaveThrown;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -77,6 +79,7 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
     }
 
     public Lesson findLessonInBlockByLocalDate(String sDate) {
+        System.out.println("|-------|-------| Начинаем поиск курса по дате");
         LocalDate lDate = getLocalDate(sDate);
         List<WebElement> initElements = initElements(LESSON_LIST);
         var currentWebElement = initElements.stream()

@@ -1,7 +1,7 @@
 package otus.ru.java.qa.professional.homework.steps.pages;
 
 import com.google.inject.Inject;
-import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Р;
 import otus.ru.java.qa.professional.homework.po.MainPage;
 
 public class MainPageSteps {
@@ -9,7 +9,7 @@ public class MainPageSteps {
     @Inject
     private MainPage mainPage;
 
-    @И("Открываю главную страницу otus.ru")
+    @Р("РћС‚РєСЂС‹РІР°СЋ РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ otus.ru")
     public void goToMainPage(){
         mainPage.open();
     }

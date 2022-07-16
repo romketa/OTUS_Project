@@ -2,8 +2,8 @@ package otus.ru.java.qa.professional.homework.steps.components;
 
 import com.google.inject.Inject;
 
-import io.cucumber.java.ru.Если;
-import io.cucumber.java.ru.Тогда;
+import io.cucumber.java.ru.Р•СЃР»Рё;
+import io.cucumber.java.ru.РўРѕРіРґР°;
 import otus.ru.java.qa.professional.homework.components.ContainerLessonsBlock;
 import otus.ru.java.qa.professional.homework.steps.World;
 
@@ -19,20 +19,20 @@ public class ContainerLessonsBlockSteps {
     @Inject
     private ContainerLessonsBlock containerLessonsBlock;
 
-    @Если("Найти курс {string} на главной странице")
+    @Р•СЃР»Рё("РќР°Р№С‚Рё РєСѓСЂСЃ {string} РЅР° РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†Рµ")
     public void findLessonOnMainPage(String courseName) {
-        System.out.println("|-------|-------| Начинаем поиск указанного курса: ");
+        System.out.println("|-------|-------| РќР°С‡РёРЅР°РµРј РїРѕРёСЃРє СѓРєР°Р·Р°РЅРЅРѕРіРѕ РєСѓСЂСЃР°: ");
         world.lesson = containerLessonsBlock.findLessonInBlock(courseName);
-        System.out.println("|-------|-------| Курс был найден: " + world.lesson.getName());
+        System.out.println("|-------|-------| РљСѓСЂСЃ Р±С‹Р» РЅР°Р№РґРµРЅ: " + world.lesson.getName());
     }
 
-    @Если("Найти курс по дате {string} или позже этой даты, если курса за указанную дату нет")
+    @Р•СЃР»Рё("РќР°Р№С‚Рё РєСѓСЂСЃ РїРѕ РґР°С‚Рµ {string} РёР»Рё РїРѕР·Р¶Рµ СЌС‚РѕР№ РґР°С‚С‹, РµСЃР»Рё РєСѓСЂСЃР° Р·Р° СѓРєР°Р·Р°РЅРЅСѓСЋ РґР°С‚Сѓ РЅРµС‚")
     public void findLessonByDate(String sDate){
         world.lesson = containerLessonsBlock.findLessonInBlockByLocalDate(sDate);
     }
 
-    @Тогда("Вывести найденный курс на консоль")
+    @РўРѕРіРґР°("Р’С‹РІРµСЃС‚Рё РЅР°Р№РґРµРЅРЅС‹Р№ РєСѓСЂСЃ РЅР° РєРѕРЅСЃРѕР»СЊ")
     public void printOutLesson(){
-        System.out.println("Курс - " + world.lesson.getName() + " Дата старта - " + world.lesson.getDate());
+        System.out.println("РљСѓСЂСЃ - " + world.lesson.getName() + " Р”Р°С‚Р° СЃС‚Р°СЂС‚Р° - " + world.lesson.getDate());
     }
 }

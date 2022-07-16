@@ -46,7 +46,7 @@ public class PreparatoryLessonBlock extends BaseComponent<PreparatoryLessonBlock
                 .get();
 
         String lessonName = getElementTextByCss(wElement, LESSON_NAME);
-        int price = getAnInt(wElement, "..\\W$");
+        int price = getAnInt(wElement, ".\\W$");
         return new Lesson(lessonName, price);
     }
 

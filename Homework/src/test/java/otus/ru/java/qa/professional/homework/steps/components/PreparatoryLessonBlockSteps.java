@@ -1,9 +1,9 @@
 package otus.ru.java.qa.professional.homework.steps.components;
 
 import com.google.inject.Inject;
-import io.cucumber.java.ru.Если;
-import io.cucumber.java.ru.И;
-import io.cucumber.java.ru.Тогда;
+import io.cucumber.java.ru.Р•СЃР»Рё;
+import io.cucumber.java.ru.Р;
+import io.cucumber.java.ru.РўРѕРіРґР°;
 import otus.ru.java.qa.professional.homework.components.PreparatoryLessonBlock;
 import otus.ru.java.qa.professional.homework.steps.World;
 
@@ -19,17 +19,17 @@ public class PreparatoryLessonBlockSteps {
     @Inject
     private PreparatoryLessonBlock preparatoryLessonBlock;
 
-    @Если("Найти самый дорогой курс")
+    @Р•СЃР»Рё("РќР°Р№С‚Рё СЃР°РјС‹Р№ РґРѕСЂРѕРіРѕР№ РєСѓСЂСЃ")
     public void findHighCostLesson(){
         world.lesson = preparatoryLessonBlock.findHighCostLesson();
     }
 
-    @И("Найти самый дешёвый курс")
+    @Р("РќР°Р№С‚Рё СЃР°РјС‹Р№ РґРµС€С‘РІС‹Р№ РєСѓСЂСЃ")
     public void findLowCostLesson(){
         world.lesson = preparatoryLessonBlock.findLowCostLesson();
     }
 
-    @Тогда("Вывести информацию о них на консоль")
+    @РўРѕРіРґР°("Р’С‹РІРµСЃС‚Рё РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РЅРёС… РЅР° РєРѕРЅСЃРѕР»СЊ")
     public void printInConsole(){
         System.out.println(world.lesson.getName() + " - " + world.lesson.getPrice());
     }
