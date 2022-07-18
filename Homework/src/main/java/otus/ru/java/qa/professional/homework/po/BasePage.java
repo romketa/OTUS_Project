@@ -11,10 +11,6 @@ import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 
 public abstract class BasePage<T> {
 
-    /*public static void openSite(WebDriver driver) {
-        driver.get(System.getProperty("webdriver.base.url"));
-    }*/
-
     protected GuiceScoped guiceScoped;
 
     public BasePage(GuiceScoped guiceScoped) {

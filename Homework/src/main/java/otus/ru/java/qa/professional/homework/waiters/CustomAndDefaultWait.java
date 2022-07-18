@@ -34,8 +34,8 @@ public class CustomAndDefaultWait {
         try {
             props.load(DriverManager.class.getClassLoader().getResourceAsStream("project.properties"));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             System.out.println("File with properties cannot be found");;
+            e.printStackTrace();
         }
         Wait customWaiter = new FluentWait<>(driver)
                 .withTimeout(Duration.of(Long.parseLong(System.getProperty("wait.for.element.timeout.seconds")), ChronoUnit.SECONDS))

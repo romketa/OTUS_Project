@@ -13,7 +13,6 @@ import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 import otus.ru.java.qa.professional.homework.waiters.CustomAndDefaultWait;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -66,8 +65,8 @@ public class ContainerLessonsBlock extends BaseComponent<ContainerLessonsBlock> 
             String href = currentWebElement.getAttribute("href");
             return new Lesson(lessonName, href);
         } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
             System.out.println("Looking '" + nameOfCourse + "' lesson is not present on main page");
+            e.printStackTrace();
         }
         return null;
     }

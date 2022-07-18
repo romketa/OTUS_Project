@@ -76,7 +76,7 @@ public abstract class BaseComponent<TComponent> {
         try {
             initElements = wait.waitForElementsVisible(this.getComponentEntity().findElements(By.cssSelector(sElement)), guiceScoped.driver);
         } catch (ComponentLocatorException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return initElements;
     }
