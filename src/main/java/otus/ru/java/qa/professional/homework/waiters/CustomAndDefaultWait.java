@@ -30,14 +30,7 @@ public class CustomAndDefaultWait {
     }
 
     public WebElement waitForCourseName(WebElement webElement, WebDriver driver) {
-        Properties props = new Properties();
-        try {
-            props.load(DriverManager.class.getClassLoader().getResourceAsStream("project.properties"));
-        } catch (IOException e) {
-            System.out.println("File with properties cannot be found");;
-            e.printStackTrace();
-        }
-        Wait customWaiter = new FluentWait<>(driver)
+        FluentWait<WebDriver> customWaiter = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.of(Long.parseLong(System.getProperty("wait.for.element.timeout.seconds")), ChronoUnit.SECONDS))
                 .pollingEvery(Duration.of(Long.parseLong(System.getProperty("polling.every.in.millis")), ChronoUnit.MILLIS))
                 .ignoring(NoSuchElementException.class);

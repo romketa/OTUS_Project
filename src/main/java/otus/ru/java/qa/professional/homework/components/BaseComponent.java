@@ -38,7 +38,7 @@ public abstract class BaseComponent<TComponent> {
     }
 
     public By getComponentLocator() throws ComponentLocatorException{
-        Class<?> clazz = this.getClass(); //получаем класс у наследника
+        Class<? extends BaseComponent> clazz = this.getClass(); //получаем класс у наследника
         if(clazz.isAnnotationPresent(Component.class)){ //проверяем, висит-ли на классе аннотация компонент
             Component component = clazz.getAnnotation(Component.class);//если она висит, тогда получаем объект из класса
             return this.locatorAnalyzer(component.value());//получаем значение из анализатора

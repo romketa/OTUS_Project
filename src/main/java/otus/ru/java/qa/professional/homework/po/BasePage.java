@@ -1,6 +1,5 @@
 package otus.ru.java.qa.professional.homework.po;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import otus.ru.java.qa.professional.homework.annotations.PagePath;
 import otus.ru.java.qa.professional.homework.annotations.navigation.Url;
@@ -9,6 +8,7 @@ import otus.ru.java.qa.professional.homework.exceptions.DataUrlNotValid;
 import otus.ru.java.qa.professional.homework.exceptions.UrlTemplateNotValid;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 
+@SuppressWarnings("unchecked")
 public abstract class BasePage<T> {
 
     protected GuiceScoped guiceScoped;
@@ -19,7 +19,7 @@ public abstract class BasePage<T> {
     }
 
     private String getPath() {
-        Class<?> clazz = this.getClass();
+        Class<? extends BasePage> clazz = this.getClass();
         if(clazz.isAnnotationPresent(PagePath.class)) {
             PagePath pagePath = clazz.getAnnotation(PagePath.class);
             return pagePath.value().replaceAll("/+$", "");
@@ -29,7 +29,7 @@ public abstract class BasePage<T> {
     }
 
     private String getPageUrlTemplate(String name) throws UrlTemplateNotValid {
-        Class<?> clazz = this.getClass();
+        Class<? extends BasePage> clazz = this.getClass();
         if(clazz.isAnnotationPresent(Url.class)) {
             Url urlTemplates = clazz.getAnnotation(Url.class);
             UrlTemplate[] templates = urlTemplates.value();
