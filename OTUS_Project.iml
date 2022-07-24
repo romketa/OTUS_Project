@@ -72,6 +72,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-suite-engine:1.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-suite-api:1.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-suite-commons:1.8.2" level="project" />
+    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-surefire-provider:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-launcher:1.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:common-java5:2.19.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.javafaker:javafaker:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:android:1.23" level="project" />
     <orderEntry type="library" name="Maven: com.github.mifmif:generex:1.0.2" level="project" />
@@ -87,10 +91,6 @@
     <orderEntry type="library" name="Maven: io.cucumber:datatable:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-plugin:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:docstring:5.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-surefire-provider:1.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-launcher:1.1.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.maven.surefire:common-java5:2.19.1" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-java:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-guice:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.inject:guice:5.1.0" level="project" />

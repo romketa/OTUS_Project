@@ -13,9 +13,10 @@
         <webdriver.manager.version>5.2.0</webdriver.manager.version>
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.2</junit.version>
-        <junit-platform.version>5.8.2</junit-platform.version>
+        <junit.platform.version>5.8.2</junit.platform.version>
         <jupiter.version>5.8.2</jupiter.version>
-        <junit-platform-suite.version>1.8.2</junit-platform-suite.version>
+        <junit.platform.suite.version>1.8.2</junit.platform.suite.version>
+        <junit.platform.surefire.provider>1.1.0</junit.platform.surefire.provider>
         <faker.version>1.0.1</faker.version>
         <dotenv>5.2.2</dotenv>
         <assertj.version>3.23.1</assertj.version>
@@ -23,7 +24,10 @@
         <cucumber.junit.version>5.5.0</cucumber.junit.version>
         <cucumber.java.version>5.5.0</cucumber.java.version>
         <cucumber.guice.version>5.5.0</cucumber.guice.version>
+        <cucumber.junit>1.2.5</cucumber.junit>
         <google.inject>5.1.0</google.inject>
+        <slf4j>1.7.25</slf4j>
+        <common.io>2.5</common.io>
 
         <browser>chrome</browser>
         <browser>firefox</browser>
@@ -83,20 +87,25 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-platform.version}</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-platform.version}</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <version>1.8.2</version>
+            <version>${junit.platform.suite.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>${junit.platform.surefire.provider}</version>
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -119,11 +128,6 @@
             <version>${cucumber.junit.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.java.version}</version>
@@ -141,7 +145,7 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.2.5</version>
+            <version>${cucumber.junit}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -163,17 +167,17 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>${common.io}</version>
         </dependency>
     </dependencies>
 
