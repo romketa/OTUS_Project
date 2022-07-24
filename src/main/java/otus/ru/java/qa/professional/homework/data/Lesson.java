@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Lesson {
 
-    private String name;
+    private final String name;
 
     private String href;
 

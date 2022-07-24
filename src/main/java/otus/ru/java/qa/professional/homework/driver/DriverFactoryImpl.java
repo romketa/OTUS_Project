@@ -1,7 +1,6 @@
 package otus.ru.java.qa.professional.homework.driver;
 
 import com.google.inject.Inject;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import otus.ru.java.qa.professional.homework.driver.impl.ChromeWebDriverImpl;
 import otus.ru.java.qa.professional.homework.driver.impl.FirefoxWebDriverImpl;
@@ -21,16 +20,16 @@ public class DriverFactoryImpl implements IDriverFactory {
     @Override
     public EventFiringWebDriver getDriver() {
         switch (guiceScoped.browserName) {
-            case CHROME: {
+            case CHROME -> {
                 return new EventFiringWebDriver(new ChromeWebDriverImpl().setUpDriver());
             }
-            case FIREFOX: {
+            case FIREFOX -> {
                 return new EventFiringWebDriver(new FirefoxWebDriverImpl().setUpDriver());
             }
-            case OPERA: {
+            case OPERA -> {
                 return new EventFiringWebDriver(new OperaWebDriverImpl().setUpDriver());
             }
-            default: throw new DriverTypeNotSupported(guiceScoped.browserName.getName());
+            default -> throw new DriverTypeNotSupported(guiceScoped.browserName.getName());
         }
     }
 }

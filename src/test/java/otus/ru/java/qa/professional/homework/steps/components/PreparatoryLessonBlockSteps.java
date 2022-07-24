@@ -9,7 +9,7 @@ import otus.ru.java.qa.professional.homework.steps.World;
 
 public class PreparatoryLessonBlockSteps {
 
-    private World world;
+    private final World world;
 
     @Inject
     private PreparatoryLessonBlockSteps(World world) {

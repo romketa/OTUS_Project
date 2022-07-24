@@ -6,16 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import otus.ru.java.qa.professional.homework.driver.impl.DriverManager;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
-
-import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Properties;
 import java.util.function.Function;
 
 public class CustomAndDefaultWait {
@@ -35,7 +30,7 @@ public class CustomAndDefaultWait {
                 .pollingEvery(Duration.of(Long.parseLong(System.getProperty("polling.every.in.millis")), ChronoUnit.MILLIS))
                 .ignoring(NoSuchElementException.class);
 
-        return (WebElement) customWaiter.until(new Function<WebDriver, WebElement>() {
+        return customWaiter.until(new Function<WebDriver, WebElement>() {
             @Override
             public WebElement apply(WebDriver driver) {
                 return webElement;

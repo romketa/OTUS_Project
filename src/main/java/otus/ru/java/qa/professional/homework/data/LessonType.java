@@ -6,7 +6,7 @@ public enum LessonType {
     COURSES("Курсы"),
     SPECIALIZATIONS("Специализация")
     ;
-    private String name;
+    private final String name;
 
     public String getName() {
         return name;

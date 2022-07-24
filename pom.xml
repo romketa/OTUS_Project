@@ -37,8 +37,6 @@
         <polling.every.in.millis>200</polling.every.in.millis>
         <webdriver.timeouts.implicitlywait>5</webdriver.timeouts.implicitlywait>
         <test.project.language>RU</test.project.language>
-        <maven.checkstyle.version>3.1.0</maven.checkstyle.version>
-        <findbugs.maven>3.0.4</findbugs.maven>
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
 
@@ -153,16 +151,6 @@
             <artifactId>junit-vintage-engine</artifactId>
             <version>${java.vintage.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>${maven.checkstyle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <version>${findbugs.maven}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
