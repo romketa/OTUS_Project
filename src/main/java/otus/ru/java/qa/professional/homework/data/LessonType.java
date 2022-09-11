@@ -4,8 +4,7 @@ import com.google.inject.Inject;
 
 public enum LessonType {
     COURSES("Курсы"),
-    SPECIALIZATIONS("Специализация")
-    ;
+    SPECIALIZATIONS("Специализация");
     private final String name;
 
     public String getName() {

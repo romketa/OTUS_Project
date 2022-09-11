@@ -4,11 +4,15 @@ import com.google.inject.Inject;
 import io.cucumber.java.ru.Пусть;
 import otus.ru.java.qa.professional.homework.data.BrowserData;
 import otus.ru.java.qa.professional.homework.driver.DriverFactoryImpl;
+import otus.ru.java.qa.professional.homework.driver.impl.DriverManager;
 import otus.ru.java.qa.professional.homework.support.GuiceScoped;
 
 import java.util.Locale;
 
 public class CommonPageSteps {
+
+    @Inject
+    private DriverManager driverManager;
 
     @Inject
     private DriverFactoryImpl driverFactory;
@@ -20,5 +24,6 @@ public class CommonPageSteps {
         BrowserData browserData = BrowserData.valueOf(browserName.toUpperCase(Locale.ROOT));
         guiceScoped.browserName = browserData;
         guiceScoped.driver = driverFactory.getDriver();
+        DriverManager.manageDriver(guiceScoped.driver);
     }
 }

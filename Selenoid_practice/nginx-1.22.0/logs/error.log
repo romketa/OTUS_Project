@@ -1,0 +1,45 @@
+2022/08/31 23:56:18 [notice] 40928#46952: signal process started
+2022/08/31 23:59:21 [notice] 47176#46144: signal process started
+2022/09/01 00:00:43 [notice] 44424#47152: signal process started
+2022/09/01 00:00:43 [error] 44424#47152: invalid PID number "" in "D:\nginx-1.22.0/logs/nginx.pid"
+2022/09/01 00:01:14 [notice] 47700#45124: signal process started
+2022/09/01 00:01:14 [error] 47700#45124: invalid PID number "" in "D:\nginx-1.22.0/logs/nginx.pid"
+2022/09/01 00:08:43 [notice] 16268#8628: signal process started
+2022/09/01 00:12:08 [notice] 21880#19536: signal process started
+2022/09/01 00:29:50 [emerg] 24088#17348: host not found in upstream "selenoid_ui" in D:\nginx-1.22.0/conf/nginx.conf:39
+2022/09/01 00:30:10 [emerg] 12552#8912: host not found in upstream "selenoid_ui" in D:\nginx-1.22.0/conf/nginx.conf:39
+2022/09/01 00:31:07 [notice] 5316#24128: signal process started
+2022/09/01 00:34:39 [emerg] 16284#10724: "upstream" directive is not allowed here in D:\nginx-1.22.0/conf/nginx.conf:119
+2022/09/01 00:35:19 [notice] 24680#24768: signal process started
+2022/09/01 00:37:57 [notice] 25548#25132: signal process started
+2022/09/01 00:38:00 [notice] 26184#6816: signal process started
+2022/09/01 00:38:00 [error] 26184#6816: CreateFile() "D:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2022/09/01 11:59:44 [notice] 28132#25072: signal process started
+2022/09/01 11:59:46 [notice] 3096#2292: signal process started
+2022/09/01 11:59:46 [error] 3096#2292: CreateFile() "D:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2022/09/01 12:25:16 [notice] 12432#11792: signal process started
+2022/09/01 12:31:29 [notice] 22064#23164: signal process started
+2022/09/01 12:31:43 [notice] 288#8108: signal process started
+2022/09/01 12:32:23 [emerg] 20868#22672: CreateFile() "D:\Repo\Selenoid_practice
+ginx\selenoid.conf" failed (123: The filename, directory name, or volume label syntax is incorrect) in D:\nginx-1.22.0/conf/nginx.conf:19
+2022/09/01 12:32:30 [emerg] 5172#21356: CreateFile() "D:\Repo\Selenoid_practice
+ginx\selenoid.conf" failed (123: The filename, directory name, or volume label syntax is incorrect) in D:\nginx-1.22.0/conf/nginx.conf:19
+2022/09/01 12:32:37 [emerg] 21876#18308: CreateFile() "D:\Repo\Selenoid_practice
+ginx\selenoid.conf" failed (123: The filename, directory name, or volume label syntax is incorrect) in D:\nginx-1.22.0/conf/nginx.conf:19
+2022/09/01 12:32:52 [notice] 23700#6448: signal process started
+2022/09/01 12:34:23 [emerg] 3004#3312: host not found in upstream "selenoid_ui" in D:\nginx-1.22.0/conf/nginx.conf:86
+2022/09/01 12:37:06 [emerg] 23944#7116: host not found in upstream "selenoid_ui" in D:\nginx-1.22.0/conf/nginx.conf:86
+2022/09/01 12:37:38 [notice] 10328#22892: signal process started
+2022/09/01 12:39:47 [notice] 2712#11968: signal process started
+2022/09/01 14:05:50 [notice] 40756#40236: signal process started
+2022/09/01 14:05:56 [notice] 37856#37208: signal process started
+2022/09/01 14:05:56 [error] 37856#37208: CreateFile() "D:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2022/09/01 14:12:25 [notice] 1620#1708: signal process started
+2022/09/01 14:12:52 [notice] 2696#3392: signal process started
+2022/09/01 14:13:47 [notice] 22868#10492: signal process started
+2022/09/01 14:27:20 [notice] 23872#23864: signal process started
+2022/09/03 12:28:43 [notice] 23348#7352: signal process started
+2022/09/03 12:29:59 [notice] 2564#9572: signal process started
+2022/09/03 12:46:40 [emerg] 7768#24908: CreateFile() "D:\nginx-1.22.0/conf/conf.d/selenoid.conf" failed (3: The system cannot find the path specified) in D:\nginx-1.22.0/conf/nginx.conf:19
+2022/09/03 12:47:27 [notice] 25052#23004: signal process started
+2022/09/03 13:10:51 [notice] 30136#2892: signal process started
