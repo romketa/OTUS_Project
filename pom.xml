@@ -279,7 +279,7 @@
                         </plugins>
                     </configuration>
                 </plugin>
-                
+
             </plugins>
         </pluginManagement>
     </build>
