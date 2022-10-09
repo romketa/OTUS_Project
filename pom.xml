@@ -10,7 +10,7 @@
 
 
     <properties>
-        <webdriver.remote.url>http://localhost:4444/wd/hub</webdriver.remote.url>
+        <webdriver.remote.url>http://localhost:4445/wd/hub</webdriver.remote.url>
         <webdriver.manager.version>4.2.0</webdriver.manager.version>
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.2</junit.version>

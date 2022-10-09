@@ -8,7 +8,7 @@ timeout(180) {
             checkout scm
         }
         stage('Running UI autotest') {
-            sh "mvn test -D\"cucumber.filter.tags\"=${TAGS}"
+            sh "mvn test -D\"cucumber.filter.tags\"=${TAGS} -Dwebdriver.remote.url=http://127.0.0.1:4445/wd/hub"
         }
         stage('Publisher allure report') {
             allure([
