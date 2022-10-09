@@ -8,7 +8,7 @@ timeout(180) {
             checkout scm
         }
         stage('Running UI autotest') {
-            sh "mvn clean test -D\"cucumber.filter.tags\"=${TAGS}"
+            sh "mvn test -D\"cucumber.filter.tags\"=${TAGS}"
         }
         stage('Publisher allure report') {
             allure([
