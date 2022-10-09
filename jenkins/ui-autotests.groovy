@@ -2,6 +2,7 @@ timeout(180){
 	node('maven-slave') {
 		wrap([$class: 'BuildUser']) {
 			onwerInfo = """<b>Owner:</b> ${env.BUID_USER}"""
+			currentBuild.description = summary
 		}
 		stage('Checkout') {
 			checkout scm
