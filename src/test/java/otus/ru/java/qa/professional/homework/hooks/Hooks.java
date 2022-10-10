@@ -14,7 +14,7 @@ public class Hooks {
     public void tearDown() {
         if (guiceScoped.driver != null) {
             guiceScoped.driver.close();
-            guiceScoped.driver.quit();
+//            guiceScoped.driver.quit();
         }
     }
 }
